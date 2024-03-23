@@ -1,0 +1,9 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": ["source.fixAll.eslint"],
+  "files.eol": "\n",
+  "prettier.endOfLine": "lf",
+  "[typescript]": {
+    "editor.tabSize": 2
+  }
+}

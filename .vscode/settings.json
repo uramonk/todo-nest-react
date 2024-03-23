@@ -1,6 +1,9 @@
 {
   "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": ["source.fixAll.eslint"],
+  "editor.codeActionsOnSave": [
+    "source.addMissingImports", 
+    "source.fixAll.eslint"
+  ],
   "files.eol": "\n",
   "prettier.endOfLine": "lf",
   "[typescript]": {

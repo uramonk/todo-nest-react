@@ -1,41 +1,39 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
-import { Item } from './items.model';
+import { Item } from './item.entity';
 import { Status } from './status.enum';
 
 @Injectable()
 export class ItemsService {
-  private todoItems: Item[] = [
-    {
-      id: 1,
-      body: 'First item',
-      status: Status.TODO,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    },
-  ];
+  constructor(
+    @InjectRepository(Item)
+    private readonly itemRepository: Repository<Item>,
+  ) {}
 
-  findAll(): Item[] {
-    return this.todoItems;
+  async findAll(): Promise<Item[]> {
+    return await this.itemRepository.find();
   }
 
-  findById(id: number): Item {
-    return this.todoItems.find((item) => item.id === id);
+  async findById(id: number): Promise<Item | null> {
+    return await this.itemRepository.findOneBy({ id: id });
   }
 
-  create(item: Item) {
-    this.todoItems.push(item);
-    return item;
+  async create(item: Item): Promise<Item> {
+    return await this.itemRepository.save(item);
   }
 
-  updateStatus(id: number, status: Status): Item {
-    const targetItem = this.findById(id);
+  async updateStatus(id: number, status: Status): Promise<Item> {
+    const targetItem = await this.findById(id);
+    if (!targetItem) {
+      throw new NotFoundException(`Item with ID ${id} not found`);
+    }
     targetItem.status = status;
-    return targetItem;
+    return await this.itemRepository.save(targetItem);
   }
 
-  delete(id: number): string {
-    this.todoItems = this.todoItems.filter((item) => item.id !== id);
-    return `Item id: ${id} delete success`;
+  async delete(id: number): Promise<void> {
+    await this.itemRepository.delete(id);
   }
 }

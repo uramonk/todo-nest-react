@@ -9,7 +9,7 @@ import {
   Post,
 } from '@nestjs/common';
 
-import { Item } from './items.model';
+import { Item } from './item.entity';
 import { ItemsService } from './items.service';
 import { Status } from './status.enum';
 
@@ -18,40 +18,34 @@ export class ItemsController {
   constructor(private readonly itemsService: ItemsService) {}
 
   @Get()
-  findAll(): Item[] {
-    return this.itemsService.findAll();
+  async findAll(): Promise<Item[]> {
+    return await this.itemsService.findAll();
   }
 
   @Get(':id')
-  findById(@Param('id', ParseIntPipe) id: number): Item {
-    return this.itemsService.findById(id);
+  async findById(@Param('id', ParseIntPipe) id: number): Promise<Item> {
+    return await this.itemsService.findById(id);
   }
 
   @Post()
-  create(
-    @Body('id', ParseIntPipe) id: number,
-    @Body('body') body: string,
-  ): Item {
+  async create(@Body('body') body: string): Promise<Item> {
     const item = {
-      id,
       body,
       status: Status.TODO,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
-    return this.itemsService.create(item);
+    } as Item;
+    return await this.itemsService.create(item);
   }
 
   @Patch(':id')
-  updateToDoStatus(
-    @Param('id') id: number,
+  async updateToDoStatus(
+    @Param('id', ParseIntPipe) id: number,
     @Body('status') status: Status,
-  ): Item {
-    return this.itemsService.updateStatus(id, status);
+  ): Promise<Item> {
+    return await this.itemsService.updateStatus(id, status);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: number): string {
-    return this.itemsService.delete(id);
+  async delete(@Param('id') id: number): Promise<void> {
+    await this.itemsService.delete(id);
   }
 }

@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -11,6 +12,16 @@ import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'user',
+      password: 'password',
+      database: 'db',
+      autoLoadEntities: true,
+      synchronize: true, // TODO: 本番環境ではtrueにしない
+    }),
     ConfigModule.forRoot({ isGlobal: true }),
     ItemsModule,
     AuthModule,

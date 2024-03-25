@@ -14,6 +14,7 @@ export class AuthService {
     const user = await this.usersService.findOne(username);
     const isMatch = await bcrypt.compare(pass, user?.password);
     if (isMatch) {
+      // パスワードを返さないようにする
       const { password, ...result } = user;
       return result;
     }

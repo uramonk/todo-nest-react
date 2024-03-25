@@ -9,6 +9,7 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [, setJwt] = useRecoilState(jwtState);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -24,7 +25,14 @@ export default function Login() {
       body: JSON.stringify({ username: username, password: password }),
     });
 
+    if (res.status === 500) {
+      setErrorMessage("サーバーエラーが発生しました");
+      setError(true);
+      return;
+    }
+
     if (res.status !== 200) {
+      setErrorMessage("ユーザー名またはパスワードが間違っています");
       setError(true);
       return;
     }
@@ -95,7 +103,7 @@ export default function Login() {
                 error ? "visible" : "hidden"
               }`}
             >
-              ユーザー名またはパスワードが間違っています
+              {errorMessage}
             </div>
           </form>
         </div>

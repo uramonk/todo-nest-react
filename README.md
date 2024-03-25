@@ -1,42 +1,62 @@
-# 参考
+# Overview
 
-https://nestjs.com/
-https://docs.nestjs.com/
-https://zenn.dev/red_frasco/articles/d5b7ec71ceacf6
-https://github.com/tkcel/todo-app-nest-react
-https://zenn.dev/morinokami/articles/nestjs-overview
+Todo app using Next.js and Nest.js.
 
-# 準備
+# frontend
 
-## https用の証明書作成
+https://localhost:3000
+
+## Installation
+
+```bash
+npm install
+```
+
+## Run
+
+```bash
+npm run dev
+```
+
+# backend
+
+https://localhost:3001
+
+## Create certificates
 
 ### mkcert
 
 ```bash
 brew install mkcert
-```
-
-### 自己ルート認証局追加
-
-```bash
 mkcert -install
 ```
 
-### 証明書作成
+### Create certificate for localhost
 
 ```bash
 cd backend
 mkcert localhost
 ```
 
-## インストール
+## Installation
 
 ```bash
 npm install
 ```
 
-# 実行
+## Run
 
 ```bash
 npm run start:dev
 ```
+
+# References 🙏
+
+- https://zenn.dev/red_frasco/articles/d5b7ec71ceacf6
+- https://github.com/tkcel/todo-app-nest-react
+- https://zenn.dev/morinokami/articles/nestjs-overview
+- https://nestjs.com
+- https://nextjs.org
+- https://tailwindcss.com
+- https://tailwindui.com
+- https://recoiljs.org

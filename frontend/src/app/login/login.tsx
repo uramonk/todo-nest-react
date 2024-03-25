@@ -8,6 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
   const [, setJwt] = useRecoilState(jwtState);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -24,6 +25,7 @@ export default function Login() {
     });
 
     if (res.status !== 200) {
+      setError(true);
       return;
     }
 
@@ -87,6 +89,13 @@ export default function Login() {
               >
                 ログイン
               </button>
+            </div>
+            <div
+              className={`text-sm text-red-600 text-center ${
+                error ? "visible" : "hidden"
+              }`}
+            >
+              ユーザー名またはパスワードが間違っています
             </div>
           </form>
         </div>

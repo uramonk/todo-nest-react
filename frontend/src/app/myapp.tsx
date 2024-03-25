@@ -16,11 +16,6 @@ export default function MyApp({
 
   useEffect(() => {
     (async () => {
-      // 未ログインの場合のリダイレクト処理
-      if (pathname === "/login") {
-        return;
-      }
-
       const res = await fetch("https://localhost:3001/users/profile", {
         method: "GET",
         headers: {
@@ -29,9 +24,10 @@ export default function MyApp({
         },
       });
 
-      const data = await res.json();
-      if (data?.statusCode === 401) {
+      if (res.status === 401) {
         router.push(`/login?redirect=${pathname}`);
+      } else if (pathname === "/login" && res.status === 200) {
+        router.push(`/`);
       }
     })();
   }, [router, pathname, jwt]);

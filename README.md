@@ -49,6 +49,15 @@ mkcert localhost
 npm install
 ```
 
+## Docker
+
+Use docker to build the database.
+See `/backend/mysql/initialize/001-init.sql` for schema and initial data.
+
+```bash
+docker-compose up -d
+```
+
 ## Run
 
 ```bash

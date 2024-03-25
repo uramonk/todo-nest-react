@@ -22,6 +22,11 @@ npm run dev
 
 https://localhost:3001
 
+## env
+
+1. Rename .env.sample to .env
+2. Set the `JWT_SECRET` environment variables
+
 ## Create certificates
 
 ### mkcert

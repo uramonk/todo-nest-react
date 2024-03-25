@@ -31,7 +31,7 @@ export default function MyApp({
 
       const data = await res.json();
       if (data?.statusCode === 401) {
-        router.push("/login");
+        router.push(`/login?redirect=${pathname}`);
       }
     })();
   }, [router, pathname, jwt]);

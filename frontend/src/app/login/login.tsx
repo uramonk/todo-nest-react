@@ -3,11 +3,14 @@
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { jwtState } from "../state/state";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [, setJwt] = useRecoilState(jwtState);
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -19,9 +22,16 @@ export default function Login() {
       },
       body: JSON.stringify({ username: username, password: password }),
     });
-    const data = await res.json();
 
+    if (res.status !== 200) {
+      return;
+    }
+
+    const data = await res.json();
     setJwt(data.access_token);
+
+    const redirect = searchParams.get("redirect");
+    router.push(redirect || "/");
   };
 
   return (

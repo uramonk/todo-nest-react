@@ -20,7 +20,6 @@ import { UsersModule } from './users/users.module';
       password: 'password',
       database: 'db',
       autoLoadEntities: true,
-      synchronize: true, // TODO: 本番環境ではtrueにしない
     }),
     ConfigModule.forRoot({ isGlobal: true }),
     ItemsModule,

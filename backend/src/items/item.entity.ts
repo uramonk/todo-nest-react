@@ -1,4 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 import { Status } from './status.enum';
 
@@ -13,9 +19,9 @@ export class Item {
   @Column({ type: 'enum', enum: Status, default: Status.TODO })
   status: Status;
 
-  @Column({ name: 'created_at' })
+  @CreateDateColumn({ name: 'created_at', type: 'datetime' })
   createdAt: Date;
 
-  @Column({ name: 'updated_at' })
+  @UpdateDateColumn({ name: 'updated_at', type: 'datetime' })
   updatedAt: Date;
 }

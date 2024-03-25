@@ -11,27 +11,23 @@ CREATE TABLE IF NOT EXISTS item (
   body VARCHAR(255) NOT NULL,
   status VARCHAR(255) NOT NULL,
   user_id INT NOT NULL,
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
 INSERT INTO
-  user (username, password, created_at, updated_at)
+  user (username, password)
 VALUES
   (
     'john',
-    '$2b$10$YhZIRU/bL6gKQctiariPF.8fXcnAljg0uD2uXgrRg3Ob8gvG.sVES',
-    CURRENT_TIMESTAMP,
-    CURRENT_TIMESTAMP
+    '$2b$10$YhZIRU/bL6gKQctiariPF.8fXcnAljg0uD2uXgrRg3Ob8gvG.sVES' -- changeme
   );
 
 INSERT INTO
-  user (username, password, created_at, updated_at)
+  user (username, password)
 VALUES
   (
     'maria',
-    '$2b$10$HT8CQJRiX3gPABW0Zdx2z.cUqIXwpdP97BRXFblbcvmQ4ASVX0nfy',
-    CURRENT_TIMESTAMP,
-    CURRENT_TIMESTAMP
+    '$2b$10$HT8CQJRiX3gPABW0Zdx2z.cUqIXwpdP97BRXFblbcvmQ4ASVX0nfy' -- guess
   );

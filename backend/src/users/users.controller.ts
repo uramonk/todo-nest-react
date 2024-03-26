@@ -1,6 +1,6 @@
 import { Controller, Get, Request } from '@nestjs/common';
 
-import { UserDto } from './user.dto';
+import { UserDto } from './dto/user.dto';
 
 @Controller('users')
 export class UserController {

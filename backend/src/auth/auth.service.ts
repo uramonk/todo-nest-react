@@ -5,6 +5,8 @@ import { toDto } from 'src/common/common';
 import { UserDto } from 'src/users/user.dto';
 import { UsersService } from 'src/users/users.service';
 
+import { JwtPayload } from './jwt.model';
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -26,7 +28,7 @@ export class AuthService {
   }
 
   async login(user: UserDto): Promise<{ access_token: string }> {
-    const payload = { username: user.username, sub: user.id };
+    const payload: JwtPayload = { username: user.username, sub: user.id };
     return {
       access_token: await this.jwtService.signAsync(payload),
     };

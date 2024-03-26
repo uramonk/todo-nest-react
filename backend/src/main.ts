@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import * as fs from 'fs';
 
@@ -12,6 +13,7 @@ async function bootstrap() {
     httpsOptions,
   });
   app.enableCors();
+  app.useGlobalPipes(new ValidationPipe());
   await app.listen(3001);
 }
 bootstrap();

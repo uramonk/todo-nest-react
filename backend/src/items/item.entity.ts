@@ -19,6 +19,9 @@ export class Item {
   @Column({ type: 'enum', enum: Status, default: Status.TODO })
   status: Status;
 
+  @Column({ name: 'user_id' })
+  userId: number;
+
   @CreateDateColumn({ name: 'created_at', type: 'datetime' })
   createdAt: Date;
 

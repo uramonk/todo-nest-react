@@ -17,6 +17,17 @@ export function toDto<T, V>(
 ): T {
   return plainToInstance(cls, plain, {
     ...options,
-    excludeExtraneousValues: true,
+    strategy: 'excludeAll',
+  });
+}
+
+export function toDtoArray<T, V>(
+  cls: ClassConstructor<T>,
+  plain: V[],
+  options?: ClassTransformOptions,
+): T[] {
+  return plainToInstance(cls, plain, {
+    ...options,
+    strategy: 'excludeAll',
   });
 }

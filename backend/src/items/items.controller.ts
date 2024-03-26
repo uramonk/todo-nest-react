@@ -7,45 +7,53 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Request,
 } from '@nestjs/common';
 
-import { Item } from './item.entity';
+import { CreateItemDto } from './dto/create-item.dto';
+import { ItemDto } from './dto/item.dto';
+import { UpdateItemDto } from './dto/update-item.dto';
 import { ItemsService } from './items.service';
-import { Status } from './status.enum';
 
 @Controller('items')
 export class ItemsController {
   constructor(private readonly itemsService: ItemsService) {}
 
   @Get()
-  async findAll(): Promise<Item[]> {
-    return await this.itemsService.findAll();
+  async findAll(@Request() req): Promise<ItemDto[]> {
+    return await this.itemsService.findAll(req.user.id);
   }
 
   @Get(':id')
-  async findById(@Param('id', ParseIntPipe) id: number): Promise<Item> {
-    return await this.itemsService.findById(id);
+  async findById(
+    @Request() req,
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<ItemDto> {
+    return await this.itemsService.findById(id, req.user.id);
   }
 
   @Post()
-  async create(@Body('body') body: string): Promise<Item> {
-    const item = {
-      body,
-      status: Status.TODO,
-    } as Item;
-    return await this.itemsService.create(item);
+  async create(
+    @Request() req,
+    @Body() createItem: CreateItemDto,
+  ): Promise<ItemDto> {
+    return await this.itemsService.create(req.user.id, createItem);
   }
 
   @Patch(':id')
   async updateToDoStatus(
+    @Request() req,
     @Param('id', ParseIntPipe) id: number,
-    @Body('status') status: Status,
-  ): Promise<Item> {
-    return await this.itemsService.updateStatus(id, status);
+    @Body() updateItem: UpdateItemDto,
+  ): Promise<ItemDto> {
+    return await this.itemsService.update(id, req.user.id, updateItem);
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: number): Promise<void> {
-    await this.itemsService.delete(id);
+  async delete(
+    @Request() req,
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<void> {
+    await this.itemsService.delete(id, req.user.id);
   }
 }

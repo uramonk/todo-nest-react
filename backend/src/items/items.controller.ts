@@ -21,7 +21,7 @@ export class ItemsController {
 
   @Get()
   async findAll(@Request() req): Promise<ItemDto[]> {
-    return await this.itemsService.findAll(req.user.id);
+    return await this.itemsService.findAll({ userId: req.user.id });
   }
 
   @Get(':id')
@@ -29,7 +29,7 @@ export class ItemsController {
     @Request() req,
     @Param('id', ParseIntPipe) id: number,
   ): Promise<ItemDto> {
-    return await this.itemsService.findById(id, req.user.id);
+    return await this.itemsService.findById({ id: id, userId: req.user.id });
   }
 
   @Post()
@@ -37,7 +37,11 @@ export class ItemsController {
     @Request() req,
     @Body() createItem: CreateItemDto,
   ): Promise<ItemDto> {
-    return await this.itemsService.create(req.user.id, createItem);
+    return await this.itemsService.create({
+      userId: req.user.id,
+      body: createItem.body,
+      status: createItem.status,
+    });
   }
 
   @Patch(':id')
@@ -46,7 +50,10 @@ export class ItemsController {
     @Param('id', ParseIntPipe) id: number,
     @Body() updateItem: UpdateItemDto,
   ): Promise<ItemDto> {
-    return await this.itemsService.update(id, req.user.id, updateItem);
+    return await this.itemsService.update(
+      { id: id, userId: req.user.id },
+      { body: updateItem.body, status: updateItem.status },
+    );
   }
 
   @Delete(':id')
@@ -54,6 +61,6 @@ export class ItemsController {
     @Request() req,
     @Param('id', ParseIntPipe) id: number,
   ): Promise<void> {
-    await this.itemsService.delete(id, req.user.id);
+    await this.itemsService.delete({ id: id, userId: req.user.id });
   }
 }

@@ -1,66 +1,62 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { Prisma } from '@prisma/client';
 import { toDto, toDtoArray } from 'src/common/common';
-import { Repository } from 'typeorm';
+import { PrismaService } from 'src/prisma.service';
 
-import { CreateItemDto } from './dto/create-item.dto';
 import { ItemDto } from './dto/item.dto';
-import { UpdateItemDto } from './dto/update-item.dto';
-import { Item } from './item.entity';
 
 @Injectable()
 export class ItemsService {
-  constructor(
-    @InjectRepository(Item)
-    private readonly itemRepository: Repository<Item>,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
-  async findAll(userId: number): Promise<ItemDto[]> {
+  async findAll(itemWhereInput: Prisma.ItemWhereInput): Promise<ItemDto[]> {
     return toDtoArray(
       ItemDto,
-      await this.itemRepository.findBy({ userId: userId }),
+      await this.prisma.item.findMany({ where: itemWhereInput }),
     );
   }
 
-  async findById(id: number, userId: number): Promise<ItemDto | null> {
+  async findById(
+    itemWhereUniqueInput: Prisma.ItemWhereUniqueInput,
+  ): Promise<ItemDto | null> {
     return toDto(
       ItemDto,
-      await this.itemRepository.findOneBy({ id: id, userId: userId }),
+      await this.prisma.item.findUnique({ where: itemWhereUniqueInput }),
     );
   }
 
-  async create(userId: number, item: CreateItemDto): Promise<ItemDto> {
-    const createItem = {
-      body: item.body,
-      status: item.status,
-      userId: userId,
-    } as Item;
-    return toDto(ItemDto, await this.itemRepository.save(createItem));
+  async create(itemCreateInput: Prisma.ItemCreateInput): Promise<ItemDto> {
+    return toDto(
+      ItemDto,
+      await this.prisma.item.create({ data: itemCreateInput }),
+    );
   }
 
   async update(
-    id: number,
-    userId: number,
-    item: UpdateItemDto,
+    itemWhereUniqueInput: Prisma.ItemWhereUniqueInput,
+    itemUpdateInput: Prisma.ItemUpdateInput,
   ): Promise<ItemDto> {
-    const targetItem = await this.findById(id, userId);
+    const targetItem = await this.findById(itemWhereUniqueInput);
     if (!targetItem) {
       throw new NotFoundException();
     }
-    // bodyとstatusのみ更新
-    const updateItem = {
-      ...targetItem,
-      body: item.body,
-      status: item.status,
-    } as Item;
-    return toDto(ItemDto, await this.itemRepository.save(updateItem));
+
+    return toDto(
+      ItemDto,
+      await this.prisma.item.update({
+        where: itemWhereUniqueInput,
+        data: itemUpdateInput,
+      }),
+    );
   }
 
-  async delete(id: number, userId: number): Promise<void> {
-    const targetItem = await this.findById(id, userId);
+  async delete(
+    itemWhereUniqueInput: Prisma.ItemWhereUniqueInput,
+  ): Promise<void> {
+    const targetItem = await this.findById(itemWhereUniqueInput);
     if (!targetItem) {
       throw new NotFoundException();
     }
-    await this.itemRepository.delete(id);
+    await this.prisma.item.delete({ where: itemWhereUniqueInput });
   }
 }

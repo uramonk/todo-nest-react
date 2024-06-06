@@ -1,6 +1,5 @@
+import { Status } from '@prisma/client';
 import { Expose } from 'class-transformer';
-
-import { Status } from '../status.enum';
 
 export class ItemDto {
   @Expose()

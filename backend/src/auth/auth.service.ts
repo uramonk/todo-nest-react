@@ -11,7 +11,7 @@ import { JwtPayload } from './jwt.model';
 export class AuthService {
   constructor(
     private readonly usersService: UsersService,
-    private jwtService: JwtService,
+    private readonly jwtService: JwtService,
   ) {}
 
   async validateUser(username: string, password: string): Promise<UserDto> {

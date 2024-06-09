@@ -32,6 +32,24 @@
 $ npm install
 ```
 
+## Setup DB
+
+```bash
+$ docker-compose up -d
+```
+
+### Migrate DB
+
+```bash
+npx prisma migrate dev
+```
+
+### Insert first data
+
+```bash
+npm run seed
+```
+
 ## Running the app
 
 ```bash

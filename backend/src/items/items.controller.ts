@@ -38,7 +38,7 @@ export class ItemsController {
     @Body() createItem: CreateItemDto,
   ): Promise<ItemDto> {
     return await this.itemsService.create({
-      userId: req.user.id,
+      user: req.user,
       body: createItem.body,
       status: createItem.status,
     });

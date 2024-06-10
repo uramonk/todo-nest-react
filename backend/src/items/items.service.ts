@@ -10,6 +10,7 @@ export class ItemsService {
   constructor(private readonly prisma: PrismaService) {}
 
   async findAll(itemWhereInput: Prisma.ItemWhereInput): Promise<ItemDto[]> {
+    console.log('CANNOT override service! Original service is used!');
     return toDtoArray(
       ItemDto,
       await this.prisma.item.findMany({ where: itemWhereInput }),

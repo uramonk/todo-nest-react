@@ -3,7 +3,6 @@ import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import { PrismaService } from 'src/prisma.service';
 import { UsersService } from 'src/users/users.service';
-import { beforeEach, describe, expect, it } from 'vitest';
 
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';

@@ -2,7 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+import { PrismaService } from 'src/prisma.service';
 import { UsersModule } from 'src/users/users.module';
+import { UsersService } from 'src/users/users.service';
 
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
@@ -24,6 +26,13 @@ import { LocalStrategy } from './local.strategy';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [
+    AuthService,
+    LocalStrategy,
+    JwtStrategy,
+    // 実行時は不要であるが、e2eテスト時は本来moduleをimportしているので不要のはずだがないとエラーになる
+    UsersService,
+    PrismaService,
+  ],
 })
 export class AuthModule {}

@@ -15,5 +15,4 @@
   "editor.quickSuggestions": {
     "strings": "on"
   },
-  "vitest.rootConfig": "backend/vitest.config.ts",
 }

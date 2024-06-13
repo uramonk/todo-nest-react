@@ -1,54 +1,39 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
-import { toDto, toDtoArray } from 'src/common/common';
+import { Item, Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
-
-import { ItemDto } from './dto/item.dto';
 
 @Injectable()
 export class ItemsService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findAll(itemWhereInput: Prisma.ItemWhereInput): Promise<ItemDto[]> {
+  async findAll(itemWhereInput: Prisma.ItemWhereInput): Promise<Item[]> {
     console.log('CANNOT override service! Original service is used!');
-    return toDtoArray(
-      ItemDto,
-      await this.prisma.item.findMany({ where: itemWhereInput }),
-    );
+    return await this.prisma.item.findMany({ where: itemWhereInput });
   }
 
   async findById(
     itemWhereUniqueInput: Prisma.ItemWhereUniqueInput,
-  ): Promise<ItemDto | null> {
-    return toDto(
-      ItemDto,
-      await this.prisma.item.findUnique({ where: itemWhereUniqueInput }),
-    );
+  ): Promise<Item | null> {
+    return await this.prisma.item.findUnique({ where: itemWhereUniqueInput });
   }
 
-  async create(itemCreateInput: Prisma.ItemCreateInput): Promise<ItemDto> {
-    return toDto(
-      ItemDto,
-      await this.prisma.item.create({ data: itemCreateInput }),
-    );
+  async create(itemCreateInput: Prisma.ItemCreateInput): Promise<Item> {
+    return await this.prisma.item.create({ data: itemCreateInput });
   }
 
   async update(
     itemWhereUniqueInput: Prisma.ItemWhereUniqueInput,
     itemUpdateInput: Prisma.ItemUpdateInput,
-  ): Promise<ItemDto> {
+  ): Promise<Item> {
     const targetItem = await this.findById(itemWhereUniqueInput);
     if (!targetItem) {
       throw new NotFoundException();
     }
 
-    return toDto(
-      ItemDto,
-      await this.prisma.item.update({
-        where: itemWhereUniqueInput,
-        data: itemUpdateInput,
-      }),
-    );
+    return await this.prisma.item.update({
+      where: itemWhereUniqueInput,
+      data: itemUpdateInput,
+    });
   }
 
   async delete(

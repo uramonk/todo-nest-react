@@ -9,9 +9,9 @@ import {
   Post,
   Request,
 } from '@nestjs/common';
+import { Item } from '@prisma/client';
 
 import { CreateItemDto } from './dto/create-item.dto';
-import { ItemDto } from './dto/item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
 import { ItemsService } from './items.service';
 
@@ -20,7 +20,7 @@ export class ItemsController {
   constructor(private readonly itemsService: ItemsService) {}
 
   @Get()
-  async findAll(@Request() req): Promise<ItemDto[]> {
+  async findAll(@Request() req): Promise<Item[]> {
     return await this.itemsService.findAll({ userId: req.user.id });
   }
 
@@ -28,7 +28,7 @@ export class ItemsController {
   async findById(
     @Request() req,
     @Param('id', ParseIntPipe) id: number,
-  ): Promise<ItemDto> {
+  ): Promise<Item> {
     return await this.itemsService.findById({ id: id, userId: req.user.id });
   }
 
@@ -36,7 +36,7 @@ export class ItemsController {
   async create(
     @Request() req,
     @Body() createItem: CreateItemDto,
-  ): Promise<ItemDto> {
+  ): Promise<Item> {
     return await this.itemsService.create({
       user: req.user,
       body: createItem.body,
@@ -49,7 +49,7 @@ export class ItemsController {
     @Request() req,
     @Param('id', ParseIntPipe) id: number,
     @Body() updateItem: UpdateItemDto,
-  ): Promise<ItemDto> {
+  ): Promise<Item> {
     return await this.itemsService.update(
       { id: id, userId: req.user.id },
       { body: updateItem.body, status: updateItem.status },

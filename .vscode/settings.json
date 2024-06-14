@@ -15,4 +15,5 @@
   "editor.quickSuggestions": {
     "strings": "on"
   },
+  "vitest.disableWorkspaceWarning": true,
 }

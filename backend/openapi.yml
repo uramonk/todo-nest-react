@@ -1,0 +1,97 @@
+openapi: 3.0.0
+paths:
+  /:
+    get:
+      operationId: AppController_getHello
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  /items:
+    get:
+      operationId: ItemsController_findAll
+      parameters: []
+      responses:
+        '200':
+          description: ''
+    post:
+      operationId: ItemsController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateItemDto'
+      responses:
+        '201':
+          description: ''
+  /items/{id}:
+    get:
+      operationId: ItemsController_findById
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+    patch:
+      operationId: ItemsController_updateToDoStatus
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateItemDto'
+      responses:
+        '200':
+          description: ''
+    delete:
+      operationId: ItemsController_delete
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+  /auth/login:
+    post:
+      operationId: AuthController_login
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  /users/profile:
+    get:
+      operationId: UserController_getProfile
+      parameters: []
+      responses:
+        '200':
+          description: ''
+info:
+  title: アドベントカレンダーサンプル
+  description: ''
+  version: 1.0.0
+  contact: {}
+tags: []
+servers: []
+components:
+  schemas:
+    CreateItemDto:
+      type: object
+      properties: {}
+    UpdateItemDto:
+      type: object
+      properties: {}

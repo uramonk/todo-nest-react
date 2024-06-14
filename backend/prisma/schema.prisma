@@ -8,6 +8,12 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator markdown {
+  provider = "prisma-markdown"
+  output   = "../docs/ERD.md"
+  title    = "sample"
+}
+
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
@@ -19,21 +25,38 @@ enum Status {
   DONE
 }
 
+/// User model.
+/// @namespace ToDos
 model User {
+  /// Primary Key. Auto-incremented.
   id        Int      @id @default(autoincrement())
+  /// Unique username.
   username  String   @unique
+  /// Password.
   password  String
+  /// Items created by the user.
   items     Item[]
+  /// Created at.
   createdAt DateTime @default(now())
+  /// Updated at.
   updatedAt DateTime @updatedAt
 }
 
+/// Item model.
+/// @namespace ToDos
 model Item {
+  /// Primary Key. Auto-incremented.
   id        Int      @id @default(autoincrement())
+  /// Title of the item.
   body      String
+  /// Status of the item.
   status    Status   @default(TODO)
+  /// User who created the item.
   user      User     @relation(fields: [userId], references: [id])
+  /// User ID.
   userId    Int
+  /// Created at.
   createdAt DateTime @default(now())
+  /// Updated at.
   updatedAt DateTime @updatedAt
 }

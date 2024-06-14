@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { jwtState } from "../state/state";
 import { useRouter, useSearchParams } from "next/navigation";
+import { DefaultApi } from "backend/generated/openapi/apis/DefaultApi";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -13,6 +14,7 @@ export default function Login() {
   const [, setJwt] = useRecoilState(jwtState);
   const router = useRouter();
   const searchParams = useSearchParams();
+  const api = new DefaultApi();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

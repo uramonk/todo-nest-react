@@ -4,8 +4,8 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { jwtState } from "../state/state";
 import { useRouter, useSearchParams } from "next/navigation";
-import { AppApi } from "backend/generated/openapi/apis/AppApi";
-import { Configuration } from "backend/generated/openapi/runtime";
+import { AppApi } from "backend/src/openapi/generated/apis/AppApi";
+import { Configuration } from "backend/src/openapi/generated/runtime";
 
 export default function Login() {
   const [username, setUsername] = useState("");

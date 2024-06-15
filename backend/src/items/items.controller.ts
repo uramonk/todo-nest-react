@@ -9,10 +9,11 @@ import {
   Post,
   Request,
 } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Item } from '@prisma/client';
 
 import { CreateItemDto } from './dto/create-item.dto';
+import { ItemDto } from './dto/item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
 import { ItemsService } from './items.service';
 
@@ -24,8 +25,9 @@ export class ItemsController {
 
   // メソッド名がfindAllItemsに変わる
   @ApiOperation({ operationId: 'findAllItems' })
+  @ApiOkResponse({ type: ItemDto, isArray: true })
   @Get()
-  async findAll(@Request() req): Promise<Item[]> {
+  async findAll(@Request() req): Promise<ItemDto[]> {
     return await this.itemsService.findAll({ userId: req.user.id });
   }
 
@@ -41,7 +43,7 @@ export class ItemsController {
   async create(
     @Request() req,
     @Body() createItem: CreateItemDto,
-  ): Promise<Item> {
+  ): Promise<ItemDto> {
     return await this.itemsService.create({
       user: req.user,
       body: createItem.body,
@@ -54,7 +56,7 @@ export class ItemsController {
     @Request() req,
     @Param('id', ParseIntPipe) id: number,
     @Body() updateItem: UpdateItemDto,
-  ): Promise<Item> {
+  ): Promise<ItemDto> {
     return await this.itemsService.update(
       { id: id, userId: req.user.id },
       { body: updateItem.body, status: updateItem.status },

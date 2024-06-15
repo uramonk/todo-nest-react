@@ -1,5 +1,5 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Status } from '@prisma/client';
-import { Expose } from 'class-transformer';
 
 export class ItemDto {
   constructor(
@@ -18,21 +18,21 @@ export class ItemDto {
     this.updatedAt = updatedAt;
   }
 
-  @Expose()
+  @ApiProperty()
   id: number;
 
-  @Expose()
+  @ApiProperty()
   body: string;
 
-  @Expose()
+  @ApiProperty()
   status: Status;
 
-  @Expose()
+  @ApiProperty()
   userId: number;
 
-  @Expose()
+  @ApiProperty()
   createdAt: Date;
 
-  @Expose()
+  @ApiProperty()
   updatedAt: Date;
 }

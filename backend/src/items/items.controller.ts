@@ -9,16 +9,21 @@ import {
   Post,
   Request,
 } from '@nestjs/common';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Item } from '@prisma/client';
 
 import { CreateItemDto } from './dto/create-item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
 import { ItemsService } from './items.service';
 
+// AppApi.tsが作成される
+@ApiTags('App')
 @Controller('items')
 export class ItemsController {
   constructor(private readonly itemsService: ItemsService) {}
 
+  // メソッド名がfindAllItemsに変わる
+  @ApiOperation({ operationId: 'findAllItems' })
   @Get()
   async findAll(@Request() req): Promise<Item[]> {
     return await this.itemsService.findAll({ userId: req.user.id });

@@ -7,13 +7,18 @@ paths:
       responses:
         '200':
           description: ''
+      tags:
+        - App
   /items:
     get:
-      operationId: ItemsController_findAll
+      operationId: findAllItems
+      summary: ''
       parameters: []
       responses:
         '200':
           description: ''
+      tags:
+        - App
     post:
       operationId: ItemsController_create
       parameters: []
@@ -26,6 +31,8 @@ paths:
       responses:
         '201':
           description: ''
+      tags:
+        - App
   /items/{id}:
     get:
       operationId: ItemsController_findById
@@ -38,6 +45,8 @@ paths:
       responses:
         '200':
           description: ''
+      tags:
+        - App
     patch:
       operationId: ItemsController_updateToDoStatus
       parameters:
@@ -55,6 +64,8 @@ paths:
       responses:
         '200':
           description: ''
+      tags:
+        - App
     delete:
       operationId: ItemsController_delete
       parameters:
@@ -66,6 +77,8 @@ paths:
       responses:
         '200':
           description: ''
+      tags:
+        - App
   /auth/login:
     post:
       operationId: AuthController_login
@@ -73,6 +86,8 @@ paths:
       responses:
         '200':
           description: ''
+      tags:
+        - App
   /users/profile:
     get:
       operationId: UserController_getProfile
@@ -80,6 +95,8 @@ paths:
       responses:
         '200':
           description: ''
+      tags:
+        - App
 info:
   title: アドベントカレンダーサンプル
   description: ''

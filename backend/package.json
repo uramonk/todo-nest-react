@@ -21,7 +21,7 @@
     "test:debug": "vitest --inspect-brk --inspect --logHeapUsage --threads=false",
     "test:e2e": "vitest run --config ./vitest.config.e2e.ts",
     "openapi:export": "ts-node -r tsconfig-paths/register src/openapi/generate.ts > openapi.yml && npm run gen-client",
-    "gen-client": "openapi-generator-cli generate -i openapi.yml -g typescript-fetch -o generated/openapi --additional-properties=modelPropertyNaming=camelCase,supportsES6=true,withInterfaces=true,typescriptThreePlus=true"
+    "gen-client": "openapi-generator-cli generate -i openapi.yml -g typescript-fetch -o generated/openapi"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

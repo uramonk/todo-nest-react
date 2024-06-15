@@ -4,7 +4,8 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { jwtState } from "../state/state";
 import { useRouter, useSearchParams } from "next/navigation";
-import { DefaultApi } from "backend/generated/openapi/apis/DefaultApi";
+import { AppApi } from "backend/generated/openapi/apis/AppApi";
+import { Configuration } from "backend/generated/openapi/runtime";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -14,7 +15,11 @@ export default function Login() {
   const [, setJwt] = useRecoilState(jwtState);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const api = new DefaultApi();
+  const api = new AppApi(
+    new Configuration({ basePath: "https://localhost:3001" })
+  );
+
+  api.findAllItems();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as fs from 'fs';
 import * as yaml from 'js-yaml';
+import * as path from 'path';
 
 import { AppModule } from '../app.module';
 
@@ -15,7 +16,9 @@ async function bootstrap(): Promise<void> {
   });
 
   const documentBuilder = new DocumentBuilder()
-    .setTitle('アドベントカレンダーサンプル')
+    .setTitle('ドキュメント')
+    .setDescription('APIのドキュメント')
+    .setVersion('0.0.1')
     .build();
   const document = SwaggerModule.createDocument(app, documentBuilder);
   SwaggerModule.setup('api', app, document);
@@ -23,8 +26,11 @@ async function bootstrap(): Promise<void> {
     skipInvalid: true,
     noRefs: true,
   });
-  // const yamlPath = path.join(__dirname, 'path_to', 'openapi.yml');
-  const yamlPath = 'openapi.yml';
+
+  if (!fs.existsSync(path.join(__dirname, 'generated'))) {
+    fs.mkdirSync(path.join(__dirname, 'generated'));
+  }
+  const yamlPath = path.join(__dirname, 'generated', 'openapi.yml');
 
   await fs.writeFileSync(yamlPath, yamlDocument);
 }

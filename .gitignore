@@ -2,3 +2,6 @@
 backend/localhost.pem
 backend/localhost-key.pem
 node_modules
+
+/packages/api/*
+!packages/api/package.json

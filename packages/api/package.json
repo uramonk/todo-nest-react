@@ -1,0 +1,8 @@
+{
+  "name": "tnr-api-client",
+  "version": "0.0.1",
+  "description": "OpenAPI Client",
+  "main": "index.ts",
+  "author": "",
+  "license": "ISC"
+}

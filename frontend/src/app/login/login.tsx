@@ -4,8 +4,7 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { jwtState } from "../state/state";
 import { useRouter, useSearchParams } from "next/navigation";
-import { AppApi } from "backend/src/openapi/generated/apis/AppApi";
-import { Configuration } from "backend/src/openapi/generated/runtime";
+import { AppApi, Configuration } from "tnr-api-client";
 
 export default function Login() {
   const [username, setUsername] = useState("");

@@ -14,7 +14,7 @@
     "react-dom": "^18",
     "recoil": "^0.7.7",
     "recoil-persist": "^5.1.0",
-    "backend": "^0.0.1"
+    "tnr-api-client": "^0.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",

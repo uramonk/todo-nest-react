@@ -1,0 +1,16 @@
+/// User model.
+/// @namespace ToDos
+model User {
+  /// Primary Key. Auto-incremented.
+  id        Int      @id @default(autoincrement())
+  /// Unique username.
+  username  String   @unique
+  /// Password.
+  password  String
+  /// Items created by the user.
+  items     Item[]
+  /// Created at.
+  createdAt DateTime @default(now())
+  /// Updated at.
+  updatedAt DateTime @updatedAt
+}

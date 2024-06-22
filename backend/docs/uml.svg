@@ -1,0 +1,1419 @@
+<svg version="1.1" baseProfile="full" width="14400.0" height="904.0" viewbox="0 0 14400 904" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+[AppController|-appService: AppService|+getHello(): string]
+[AppModule||]
+[AppService||+getHello(): string]
+[PrismaService||+onModuleInit(): Promise&lt;void&gt;]
+[PrismaClient&lt;T,U,ExtArgs&gt;]&lt;:-[PrismaService]
+[OnModuleInit]&lt;:--[PrismaService]
+[AuthController|-authService: AuthService|+login(): Promise&lt;{ access_token: string; }&gt;]
+[AuthModule||]
+[AuthService|-usersService: UsersService;-jwtService: JwtService|+validateUser(): Promise&lt;UserDto&gt;;+login(): Promise&lt;{ access_token: string; }&gt;]
+[JwtAuthGuard|-reflector: Reflector|+canActivate(): boolean \| Promise&lt;boolean&gt; \| Observable&lt;boolean&gt;]
+[&lt;interface&gt;JwtPayload|+sub: number;+username: string|]
+[JwtStrategy||+validate(): Promise&lt;{ id: number; username: string; }&gt;]
+[Strategy]&lt;:-[JwtStrategy]
+[LocalAuthGuard||]
+[LocalStrategy|-authService: AuthService|+validate(): Promise&lt;any&gt;]
+[Strategy]&lt;:-[LocalStrategy]
+[ItemsController|-itemsService: ItemsService|+findAll(): Promise&lt;ItemDto\[\]&gt;;+findById(): Promise&lt;{ id: number; body: string; status: Status; userId: number; createdAt: Date; updatedAt: Date; }&gt;;+create(): Promise&lt;ItemDto&gt;;+updateToDoStatus(): Promise&lt;ItemDto&gt;;+delete(): Promise&lt;void&gt;]
+[ItemsModule||]
+[ItemsService|-prisma: PrismaService|+findAll(): Promise&lt;{ id: number; body: string; status: Status; userId: number; createdAt: Date; updatedAt: Date; }\[\]&gt;;+findById(): Promise&lt;{ id: number; body: string; status: Status; userId: number; createdAt: Date; updatedAt: Date; }&gt;;+create(): Promise&lt;{ id: number; body: string; status: Status; userId: number; createdAt: Date; updatedAt: Date; }&gt;;+update(): Promise&lt;{ id: number; body: string; status: Status; userId: number; createdAt: Date; updatedAt: Date; }&gt;;+delete(): Promise&lt;void&gt;]
+[UserController||+getProfile(): UserDto]
+[UsersModule||]
+[UsersService|-prisma: PrismaService|+findOne(): Promise&lt;{ id: number; username: string; password: string; createdAt: Date; updatedAt: Date; }&gt;]
+[CreateItemDto|+body: string;+status: Status|]
+[ItemDto|+id: number;+body: string;+status: Status;+userId: number;+createdAt: Date;+updatedAt: Date|]
+[UpdateItemDto|+body: string;+status: Status|]
+[Configuration|-configuration: ConfigurationParameters|]
+[BaseAPI|-static jsonRegex: RegExp;-middleware: Middleware\[\];-fetchApi: (url: string, init: RequestInit) =&gt; Promise&lt;Response&gt;;\#configuration: Configuration|+withMiddleware(): T;+withPreMiddleware(): T;+withPostMiddleware(): T;\#isJsonMime(): boolean;\#request(): Promise&lt;Response&gt;;-createFetchParams(): Promise&lt;{ url: string; init: RequestInit; }&gt;;-clone(): T]
+[ResponseError|+name: &quot;ResponseError&quot;;+response: Response|]
+[FetchError|+name: &quot;FetchError&quot;;+cause: Error|]
+[RequiredError|+name: &quot;RequiredError&quot;;+field: string|]
+[JSONApiResponse&lt;T&gt;|+raw: Response;-transformer: ResponseTransformer&lt;T&gt;|+value(): Promise&lt;T&gt;]
+[VoidApiResponse|+raw: Response|+value(): Promise&lt;void&gt;]
+[BlobApiResponse|+raw: Response|+value(): Promise&lt;Blob&gt;]
+[TextApiResponse|+raw: Response|+value(): Promise&lt;string&gt;]
+[&lt;interface&gt;ConfigurationParameters|+basePath?: string;+fetchApi?: (input: RequestInfo \| URL, init?: RequestInit) =&gt; Promise&lt;Response&gt;;+middleware?: Middleware\[\];+queryParamsStringify?: (params: HTTPQuery) =&gt; string;+username?: string;+password?: string;+apiKey?: string \| Promise&lt;string&gt; \| ((name: string) =&gt; string \| Promise&lt;string&gt;);+accessToken?: string \| Promise&lt;string&gt; \| ((name?: string, scopes?: string\[\]) =&gt; string \| Promise&lt;string&gt;);+headers?: HTTPHeaders;+credentials?: RequestCredentials|]
+[&lt;interface&gt;FetchParams|+url: string;+init: RequestInit|]
+[&lt;interface&gt;RequestOpts|+path: string;+method: HTTPMethod;+headers: HTTPHeaders;+query?: HTTPQuery;+body?: any|]
+[&lt;interface&gt;Consume|+contentType: string|]
+[&lt;interface&gt;RequestContext|+fetch: (input: RequestInfo \| URL, init?: RequestInit) =&gt; Promise&lt;Response&gt;;+url: string;+init: RequestInit|]
+[&lt;interface&gt;ResponseContext|+fetch: (input: RequestInfo \| URL, init?: RequestInit) =&gt; Promise&lt;Response&gt;;+url: string;+init: RequestInit;+response: Response|]
+[&lt;interface&gt;ErrorContext|+fetch: (input: RequestInfo \| URL, init?: RequestInit) =&gt; Promise&lt;Response&gt;;+url: string;+init: RequestInit;+error: unknown;+response?: Response|]
+[&lt;interface&gt;Middleware||+pre(): Promise&lt;void \| FetchParams&gt;;+post(): Promise&lt;void \| Response&gt;;+onError(): Promise&lt;void \| Response&gt;]
+[&lt;interface&gt;ApiResponse&lt;T&gt;|+raw: Response|+value(): Promise&lt;T&gt;]
+[&lt;interface&gt;ResponseTransformer&lt;T&gt;||]
+[&lt;type&gt;HTTPHeaders||]
+[&lt;type&gt;HTTPQuery||]
+[&lt;type&gt;HTTPRequestInit|+headers?: HTTPHeaders;+method: HTTPMethod;+credentials?: RequestCredentials;+body?: any|]
+[UserDto|+id: number;+username: string;+createdAt: Date;+updatedAt: Date|]
+[AppApi||+appControllerGetHelloRaw(): Promise&lt;ApiResponse&lt;void&gt;&gt;;+appControllerGetHello(): Promise&lt;void&gt;;+authControllerLoginRaw(): Promise&lt;ApiResponse&lt;void&gt;&gt;;+authControllerLogin(): Promise&lt;void&gt;;+findAllItemsRaw(): Promise&lt;ApiResponse&lt;ItemDto\[\]&gt;&gt;;+findAllItems(): Promise&lt;ItemDto\[\]&gt;;+itemsControllerCreateRaw(): Promise&lt;ApiResponse&lt;void&gt;&gt;;+itemsControllerCreate(): Promise&lt;void&gt;;+itemsControllerDeleteRaw(): Promise&lt;ApiResponse&lt;void&gt;&gt;;+itemsControllerDelete(): Promise&lt;void&gt;;+itemsControllerFindByIdRaw(): Promise&lt;ApiResponse&lt;void&gt;&gt;;+itemsControllerFindById(): Promise&lt;void&gt;;+itemsControllerUpdateToDoStatusRaw(): Promise&lt;ApiResponse&lt;void&gt;&gt;;+itemsControllerUpdateToDoStatus(): Promise&lt;void&gt;;+userControllerGetProfileRaw(): Promise&lt;ApiResponse&lt;void&gt;&gt;;+userControllerGetProfile(): Promise&lt;void&gt;]
+[&lt;interface&gt;ItemsControllerCreateRequest|+createItemDto: CreateItemDto|]
+[&lt;interface&gt;ItemsControllerDeleteRequest|+id: number|]
+[&lt;interface&gt;ItemsControllerFindByIdRequest|+id: number|]
+[&lt;interface&gt;ItemsControllerUpdateToDoStatusRequest|+id: number;+updateItemDto: UpdateItemDto|]
+[BaseAPI]&lt;:-[AppApi]
+[&lt;interface&gt;CreateItemDto|+body: string;+status: string|]
+[&lt;interface&gt;ItemDto|+id: number;+body: string;+status: string;+userId: number;+createdAt: Date;+updatedAt: Date|]
+[&lt;interface&gt;UpdateItemDto|+body: string;+status: string|]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="904.0" width="14400.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+<path d="M707.0 285.3 L707 533 L791.8395522388059 665.5 L791.8 665.5 " fill="none"></path>
+<path d="M712.3 285.3 L707.0 285.3 L701.7 285.3 L707.0 272.0 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M921.5 285.3 L921.5 533 L836.6604477611941 665.5 L836.7 665.5 " fill="none"></path>
+</g>
+<path d="M926.8 285.3 L921.5 285.3 L916.2 285.3 L921.5 272.0 Z"></path>
+<path d="M2705.5 275.9 L1996.75 533 L1996.75 650.5 L1996.8 650.5 " fill="none"></path>
+<path d="M2707.3 280.9 L2705.5 275.9 L2703.6 270.9 L2718.0 271.4 Z"></path>
+<path d="M2813.0 268.2 L4034 533 L4034 654 L4034.0 654.0 " fill="none"></path>
+<path d="M2814.2 263.0 L2813.0 268.2 L2811.9 273.4 L2800.0 265.4 Z"></path>
+<path d="M5756.5 398.8 L5756.5 533 L5756.5 553 L5756.5 553.0 " fill="none"></path>
+<path d="M5761.8 398.8 L5756.5 398.8 L5751.2 398.8 L5756.5 385.5 Z"></path>
+<g data-name="AppController">
+<g fill="#eee8d5" stroke="#33322E" data-name="AppController">
+<rect x="0.0" y="210.0" height="93.0" width="211.0" data-name="AppController"></rect>
+<path d="M0.0 241.0 L211.0 241.0" fill="none" data-name="AppController"></path>
+<path d="M0.0 272.0 L211.0 272.0" fill="none" data-name="AppController"></path>
+</g>
+<g transform="translate(0, 210)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AppController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AppController">
+<a id="../src/app.controller.ts.AppController" xlink:href="../src/app.controller.ts"><text x="97.5" y="13.5" stroke="none" text-anchor="middle" data-name="AppController">AppController</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 241)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AppController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AppController">
+<text x="0.0" y="13.5" stroke="none" data-name="AppController">-appService: AppService</text>
+
+</g>
+</g>
+<g transform="translate(0, 272)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AppController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AppController">
+<text x="0.0" y="13.5" stroke="none" data-name="AppController">+getHello(): string</text>
+
+</g>
+</g>
+</g>
+<g data-name="AppModule">
+<g fill="#eee8d5" stroke="#33322E" data-name="AppModule">
+<rect x="251.0" y="233.0" height="47.0" width="105.0" data-name="AppModule"></rect>
+<path d="M251.0 264.0 L356.0 264.0" fill="none" data-name="AppModule"></path>
+<path d="M251.0 272.0 L356.0 272.0" fill="none" data-name="AppModule"></path>
+</g>
+<g transform="translate(251, 233)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AppModule">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AppModule">
+<a id="../src/app.module.ts.AppModule" xlink:href="../src/app.module.ts"><text x="44.5" y="13.5" stroke="none" text-anchor="middle" data-name="AppModule">AppModule</text></a>
+
+</g>
+</g>
+<g transform="translate(251, 264)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AppModule">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AppModule">
+
+</g>
+</g>
+<g transform="translate(251, 272)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AppModule">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AppModule">
+
+</g>
+</g>
+</g>
+<g data-name="AppService">
+<g fill="#eee8d5" stroke="#33322E" data-name="AppService">
+<rect x="396.0" y="221.5" height="70.0" width="157.0" data-name="AppService"></rect>
+<path d="M396.0 252.5 L553.0 252.5" fill="none" data-name="AppService"></path>
+<path d="M396.0 260.5 L553.0 260.5" fill="none" data-name="AppService"></path>
+</g>
+<g transform="translate(396, 221.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AppService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AppService">
+<a id="../src/app.service.ts.AppService" xlink:href="../src/app.service.ts"><text x="70.5" y="13.5" stroke="none" text-anchor="middle" data-name="AppService">AppService</text></a>
+
+</g>
+</g>
+<g transform="translate(396, 252.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AppService">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AppService">
+
+</g>
+</g>
+<g transform="translate(396, 260.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AppService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AppService">
+<text x="0.0" y="13.5" stroke="none" data-name="AppService">+getHello(): string</text>
+
+</g>
+</g>
+</g>
+<g data-name="PrismaService">
+<g fill="#eee8d5" stroke="#33322E" data-name="PrismaService">
+<rect x="680.8" y="665.5" height="70.0" width="267.0" data-name="PrismaService"></rect>
+<path d="M680.8 696.5 L947.8 696.5" fill="none" data-name="PrismaService"></path>
+<path d="M680.8 704.5 L947.8 704.5" fill="none" data-name="PrismaService"></path>
+</g>
+<g transform="translate(680.75, 665.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PrismaService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PrismaService">
+<a id="../src/prisma.service.ts.PrismaService" xlink:href="../src/prisma.service.ts"><text x="125.5" y="13.5" stroke="none" text-anchor="middle" data-name="PrismaService">PrismaService</text></a>
+
+</g>
+</g>
+<g transform="translate(680.75, 696.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PrismaService">
+<g transform="translate(8, 8)" fill="#33322E" data-name="PrismaService">
+
+</g>
+</g>
+<g transform="translate(680.75, 704.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PrismaService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PrismaService">
+<text x="0.0" y="13.5" stroke="none" data-name="PrismaService">+onModuleInit(): Promise&lt;void&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="PrismaClient&lt;T,U,ExtArgs&gt;">
+<g fill="#eee8d5" stroke="#33322E" data-name="PrismaClient&lt;T,U,ExtArgs&gt;">
+<rect x="593.0" y="241.0" height="31.0" width="228.0" data-name="PrismaClient&lt;T,U,ExtArgs&gt;"></rect>
+</g>
+<g transform="translate(593, 241)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PrismaClient&lt;T,U,ExtArgs&gt;">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PrismaClient&lt;T,U,ExtArgs&gt;">
+<text x="106.0" y="13.5" stroke="none" text-anchor="middle" data-name="PrismaClient&lt;T,U,ExtArgs&gt;">PrismaClient&lt;T,U,ExtArgs&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="OnModuleInit">
+<g fill="#eee8d5" stroke="#33322E" data-name="OnModuleInit">
+<rect x="861.0" y="241.0" height="31.0" width="121.0" data-name="OnModuleInit"></rect>
+</g>
+<g transform="translate(861, 241)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="OnModuleInit">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="OnModuleInit">
+<text x="52.5" y="13.5" stroke="none" text-anchor="middle" data-name="OnModuleInit">OnModuleInit</text>
+
+</g>
+</g>
+</g>
+<g data-name="AuthController">
+<g fill="#eee8d5" stroke="#33322E" data-name="AuthController">
+<rect x="1022.0" y="202.5" height="108.0" width="335.0" data-name="AuthController"></rect>
+<path d="M1022.0 233.5 L1357.0 233.5" fill="none" data-name="AuthController"></path>
+<path d="M1022.0 264.5 L1357.0 264.5" fill="none" data-name="AuthController"></path>
+</g>
+<g transform="translate(1022, 202.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AuthController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AuthController">
+<a id="../src/auth/auth.controller.ts.AuthController" xlink:href="../src/auth/auth.controller.ts"><text x="159.5" y="13.5" stroke="none" text-anchor="middle" data-name="AuthController">AuthController</text></a>
+
+</g>
+</g>
+<g transform="translate(1022, 233.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthController">
+<text x="0.0" y="13.5" stroke="none" data-name="AuthController">-authService: AuthService</text>
+
+</g>
+</g>
+<g transform="translate(1022, 264.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthController">
+<text x="0.0" y="13.5" stroke="none" data-name="AuthController">+login(): Promise&lt;{ access_token: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="AuthController">}&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="AuthModule">
+<g fill="#eee8d5" stroke="#33322E" data-name="AuthModule">
+<rect x="1397.0" y="233.0" height="47.0" width="110.0" data-name="AuthModule"></rect>
+<path d="M1397.0 264.0 L1507.0 264.0" fill="none" data-name="AuthModule"></path>
+<path d="M1397.0 272.0 L1507.0 272.0" fill="none" data-name="AuthModule"></path>
+</g>
+<g transform="translate(1397, 233)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AuthModule">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AuthModule">
+<a id="../src/auth/auth.module.ts.AuthModule" xlink:href="../src/auth/auth.module.ts"><text x="47.0" y="13.5" stroke="none" text-anchor="middle" data-name="AuthModule">AuthModule</text></a>
+
+</g>
+</g>
+<g transform="translate(1397, 264)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthModule">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AuthModule">
+
+</g>
+</g>
+<g transform="translate(1397, 272)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthModule">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AuthModule">
+
+</g>
+</g>
+</g>
+<g data-name="AuthService">
+<g fill="#eee8d5" stroke="#33322E" data-name="AuthService">
+<rect x="1547.0" y="187.5" height="138.0" width="335.0" data-name="AuthService"></rect>
+<path d="M1547.0 218.5 L1882.0 218.5" fill="none" data-name="AuthService"></path>
+<path d="M1547.0 264.5 L1882.0 264.5" fill="none" data-name="AuthService"></path>
+</g>
+<g transform="translate(1547, 187.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AuthService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AuthService">
+<a id="../src/auth/auth.service.ts.AuthService" xlink:href="../src/auth/auth.service.ts"><text x="159.5" y="13.5" stroke="none" text-anchor="middle" data-name="AuthService">AuthService</text></a>
+
+</g>
+</g>
+<g transform="translate(1547, 218.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthService">
+<text x="0.0" y="13.5" stroke="none" data-name="AuthService">-usersService: UsersService</text>
+<text x="0.0" y="28.5" stroke="none" data-name="AuthService">-jwtService: JwtService</text>
+
+</g>
+</g>
+<g transform="translate(1547, 264.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthService">
+<text x="0.0" y="13.5" stroke="none" data-name="AuthService">+validateUser(): Promise&lt;UserDto&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="AuthService">+login(): Promise&lt;{ access_token: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="AuthService">}&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="JwtAuthGuard">
+<g fill="#eee8d5" stroke="#33322E" data-name="JwtAuthGuard">
+<rect x="1922.0" y="210.0" height="93.0" width="557.0" data-name="JwtAuthGuard"></rect>
+<path d="M1922.0 241.0 L2479.0 241.0" fill="none" data-name="JwtAuthGuard"></path>
+<path d="M1922.0 272.0 L2479.0 272.0" fill="none" data-name="JwtAuthGuard"></path>
+</g>
+<g transform="translate(1922, 210)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="JwtAuthGuard">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="JwtAuthGuard">
+<a id="../src/auth/jwt-auth.guard.ts.JwtAuthGuard" xlink:href="../src/auth/jwt-auth.guard.ts"><text x="270.5" y="13.5" stroke="none" text-anchor="middle" data-name="JwtAuthGuard">JwtAuthGuard</text></a>
+
+</g>
+</g>
+<g transform="translate(1922, 241)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="JwtAuthGuard">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="JwtAuthGuard">
+<text x="0.0" y="13.5" stroke="none" data-name="JwtAuthGuard">-reflector: Reflector</text>
+
+</g>
+</g>
+<g transform="translate(1922, 272)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="JwtAuthGuard">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="JwtAuthGuard">
+<text x="0.0" y="13.5" stroke="none" data-name="JwtAuthGuard">+canActivate(): boolean | Promise&lt;boolean&gt; | Observable&lt;boolean&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="JwtPayload">
+<g fill="lightblue" stroke="#33322E" data-name="JwtPayload">
+<rect x="2519.0" y="214.0" height="85.0" width="159.0" data-name="JwtPayload"></rect>
+<path d="M2519.0 245.0 L2678.0 245.0" fill="none" data-name="JwtPayload"></path>
+<path d="M2519.0 291.0 L2678.0 291.0" fill="none" data-name="JwtPayload"></path>
+</g>
+<g transform="translate(2519, 214)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="JwtPayload">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="JwtPayload">
+<a id="../src/auth/jwt.model.ts.JwtPayload" xlink:href="../src/auth/jwt.model.ts"><text x="71.5" y="13.5" stroke="none" text-anchor="middle" data-name="JwtPayload">JwtPayload</text></a>
+
+</g>
+</g>
+<g transform="translate(2519, 245)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="JwtPayload">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="JwtPayload">
+<text x="0.0" y="13.5" stroke="none" data-name="JwtPayload">+sub: number</text>
+<text x="0.0" y="28.5" stroke="none" data-name="JwtPayload">+username: string</text>
+
+</g>
+</g>
+<g transform="translate(2519, 291)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="JwtPayload">
+<g transform="translate(8, 8)" fill="#33322E" data-name="JwtPayload">
+
+</g>
+</g>
+</g>
+<g data-name="JwtStrategy">
+<g fill="#eee8d5" stroke="#33322E" data-name="JwtStrategy">
+<rect x="1857.3" y="650.5" height="100.0" width="279.0" data-name="JwtStrategy"></rect>
+<path d="M1857.3 681.5 L2136.3 681.5" fill="none" data-name="JwtStrategy"></path>
+<path d="M1857.3 689.5 L2136.3 689.5" fill="none" data-name="JwtStrategy"></path>
+</g>
+<g transform="translate(1857.25, 650.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="JwtStrategy">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="JwtStrategy">
+<a id="../src/auth/jwt.strategy.ts.JwtStrategy" xlink:href="../src/auth/jwt.strategy.ts"><text x="131.5" y="13.5" stroke="none" text-anchor="middle" data-name="JwtStrategy">JwtStrategy</text></a>
+
+</g>
+</g>
+<g transform="translate(1857.25, 681.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="JwtStrategy">
+<g transform="translate(8, 8)" fill="#33322E" data-name="JwtStrategy">
+
+</g>
+</g>
+<g transform="translate(1857.25, 689.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="JwtStrategy">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="JwtStrategy">
+<text x="0.0" y="13.5" stroke="none" data-name="JwtStrategy">+validate(): Promise&lt;{ id: number</text>
+<text x="0.0" y="28.5" stroke="none" data-name="JwtStrategy">username: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="JwtStrategy">}&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="Strategy">
+<g fill="#eee8d5" stroke="#33322E" data-name="Strategy">
+<rect x="2718.0" y="241.0" height="31.0" width="82.0" data-name="Strategy"></rect>
+</g>
+<g transform="translate(2718, 241)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Strategy">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Strategy">
+<text x="33.0" y="13.5" stroke="none" text-anchor="middle" data-name="Strategy">Strategy</text>
+
+</g>
+</g>
+</g>
+<g data-name="LocalAuthGuard">
+<g fill="#eee8d5" stroke="#33322E" data-name="LocalAuthGuard">
+<rect x="2840.0" y="233.0" height="47.0" width="144.0" data-name="LocalAuthGuard"></rect>
+<path d="M2840.0 264.0 L2984.0 264.0" fill="none" data-name="LocalAuthGuard"></path>
+<path d="M2840.0 272.0 L2984.0 272.0" fill="none" data-name="LocalAuthGuard"></path>
+</g>
+<g transform="translate(2840, 233)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="LocalAuthGuard">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="LocalAuthGuard">
+<a id="../src/auth/local-auth.guard.ts.LocalAuthGuard" xlink:href="../src/auth/local-auth.guard.ts"><text x="64.0" y="13.5" stroke="none" text-anchor="middle" data-name="LocalAuthGuard">LocalAuthGuard</text></a>
+
+</g>
+</g>
+<g transform="translate(2840, 264)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LocalAuthGuard">
+<g transform="translate(8, 8)" fill="#33322E" data-name="LocalAuthGuard">
+
+</g>
+</g>
+<g transform="translate(2840, 272)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LocalAuthGuard">
+<g transform="translate(8, 8)" fill="#33322E" data-name="LocalAuthGuard">
+
+</g>
+</g>
+</g>
+<g data-name="LocalStrategy">
+<g fill="#eee8d5" stroke="#33322E" data-name="LocalStrategy">
+<rect x="3922.5" y="654.0" height="93.0" width="223.0" data-name="LocalStrategy"></rect>
+<path d="M3922.5 685.0 L4145.5 685.0" fill="none" data-name="LocalStrategy"></path>
+<path d="M3922.5 716.0 L4145.5 716.0" fill="none" data-name="LocalStrategy"></path>
+</g>
+<g transform="translate(3922.5, 654)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="LocalStrategy">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="LocalStrategy">
+<a id="../src/auth/local.strategy.ts.LocalStrategy" xlink:href="../src/auth/local.strategy.ts"><text x="103.5" y="13.5" stroke="none" text-anchor="middle" data-name="LocalStrategy">LocalStrategy</text></a>
+
+</g>
+</g>
+<g transform="translate(3922.5, 685)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LocalStrategy">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="LocalStrategy">
+<text x="0.0" y="13.5" stroke="none" data-name="LocalStrategy">-authService: AuthService</text>
+
+</g>
+</g>
+<g transform="translate(3922.5, 716)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LocalStrategy">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="LocalStrategy">
+<text x="0.0" y="13.5" stroke="none" data-name="LocalStrategy">+validate(): Promise&lt;any&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="ItemsController">
+<g fill="#eee8d5" stroke="#33322E" data-name="ItemsController">
+<rect x="3024.0" y="135.0" height="243.0" width="340.0" data-name="ItemsController"></rect>
+<path d="M3024.0 166.0 L3364.0 166.0" fill="none" data-name="ItemsController"></path>
+<path d="M3024.0 197.0 L3364.0 197.0" fill="none" data-name="ItemsController"></path>
+</g>
+<g transform="translate(3024, 135)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ItemsController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ItemsController">
+<a id="../src/items/items.controller.ts.ItemsController" xlink:href="../src/items/items.controller.ts"><text x="162.0" y="13.5" stroke="none" text-anchor="middle" data-name="ItemsController">ItemsController</text></a>
+
+</g>
+</g>
+<g transform="translate(3024, 166)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ItemsController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ItemsController">
+<text x="0.0" y="13.5" stroke="none" data-name="ItemsController">-itemsService: ItemsService</text>
+
+</g>
+</g>
+<g transform="translate(3024, 197)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ItemsController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ItemsController">
+<text x="0.0" y="13.5" stroke="none" data-name="ItemsController">+findAll(): Promise&lt;ItemDto[]&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="ItemsController">+findById(): Promise&lt;{ id: number</text>
+<text x="0.0" y="43.5" stroke="none" data-name="ItemsController">body: string</text>
+<text x="0.0" y="58.5" stroke="none" data-name="ItemsController">status: Status</text>
+<text x="0.0" y="73.5" stroke="none" data-name="ItemsController">userId: number</text>
+<text x="0.0" y="88.5" stroke="none" data-name="ItemsController">createdAt: Date</text>
+<text x="0.0" y="103.5" stroke="none" data-name="ItemsController">updatedAt: Date</text>
+<text x="0.0" y="118.5" stroke="none" data-name="ItemsController">}&gt;</text>
+<text x="0.0" y="133.5" stroke="none" data-name="ItemsController">+create(): Promise&lt;ItemDto&gt;</text>
+<text x="0.0" y="148.5" stroke="none" data-name="ItemsController">+updateToDoStatus(): Promise&lt;ItemDto&gt;</text>
+<text x="0.0" y="163.5" stroke="none" data-name="ItemsController">+delete(): Promise&lt;void&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="ItemsModule">
+<g fill="#eee8d5" stroke="#33322E" data-name="ItemsModule">
+<rect x="3404.0" y="233.0" height="47.0" width="117.0" data-name="ItemsModule"></rect>
+<path d="M3404.0 264.0 L3521.0 264.0" fill="none" data-name="ItemsModule"></path>
+<path d="M3404.0 272.0 L3521.0 272.0" fill="none" data-name="ItemsModule"></path>
+</g>
+<g transform="translate(3404, 233)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ItemsModule">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ItemsModule">
+<a id="../src/items/items.module.ts.ItemsModule" xlink:href="../src/items/items.module.ts"><text x="50.5" y="13.5" stroke="none" text-anchor="middle" data-name="ItemsModule">ItemsModule</text></a>
+
+</g>
+</g>
+<g transform="translate(3404, 264)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ItemsModule">
+<g transform="translate(8, 8)" fill="#33322E" data-name="ItemsModule">
+
+</g>
+</g>
+<g transform="translate(3404, 272)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ItemsModule">
+<g transform="translate(8, 8)" fill="#33322E" data-name="ItemsModule">
+
+</g>
+</g>
+</g>
+<g data-name="ItemsService">
+<g fill="#eee8d5" stroke="#33322E" data-name="ItemsService">
+<rect x="3561.0" y="0.0" height="513.0" width="281.0" data-name="ItemsService"></rect>
+<path d="M3561.0 31.0 L3842.0 31.0" fill="none" data-name="ItemsService"></path>
+<path d="M3561.0 62.0 L3842.0 62.0" fill="none" data-name="ItemsService"></path>
+</g>
+<g transform="translate(3561, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ItemsService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ItemsService">
+<a id="../src/items/items.service.ts.ItemsService" xlink:href="../src/items/items.service.ts"><text x="132.5" y="13.5" stroke="none" text-anchor="middle" data-name="ItemsService">ItemsService</text></a>
+
+</g>
+</g>
+<g transform="translate(3561, 31)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ItemsService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ItemsService">
+<text x="0.0" y="13.5" stroke="none" data-name="ItemsService">-prisma: PrismaService</text>
+
+</g>
+</g>
+<g transform="translate(3561, 62)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ItemsService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ItemsService">
+<text x="0.0" y="13.5" stroke="none" data-name="ItemsService">+findAll(): Promise&lt;{ id: number</text>
+<text x="0.0" y="28.5" stroke="none" data-name="ItemsService">body: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="ItemsService">status: Status</text>
+<text x="0.0" y="58.5" stroke="none" data-name="ItemsService">userId: number</text>
+<text x="0.0" y="73.5" stroke="none" data-name="ItemsService">createdAt: Date</text>
+<text x="0.0" y="88.5" stroke="none" data-name="ItemsService">updatedAt: Date</text>
+<text x="0.0" y="103.5" stroke="none" data-name="ItemsService">}[]&gt;</text>
+<text x="0.0" y="118.5" stroke="none" data-name="ItemsService">+findById(): Promise&lt;{ id: number</text>
+<text x="0.0" y="133.5" stroke="none" data-name="ItemsService">body: string</text>
+<text x="0.0" y="148.5" stroke="none" data-name="ItemsService">status: Status</text>
+<text x="0.0" y="163.5" stroke="none" data-name="ItemsService">userId: number</text>
+<text x="0.0" y="178.5" stroke="none" data-name="ItemsService">createdAt: Date</text>
+<text x="0.0" y="193.5" stroke="none" data-name="ItemsService">updatedAt: Date</text>
+<text x="0.0" y="208.5" stroke="none" data-name="ItemsService">}&gt;</text>
+<text x="0.0" y="223.5" stroke="none" data-name="ItemsService">+create(): Promise&lt;{ id: number</text>
+<text x="0.0" y="238.5" stroke="none" data-name="ItemsService">body: string</text>
+<text x="0.0" y="253.5" stroke="none" data-name="ItemsService">status: Status</text>
+<text x="0.0" y="268.5" stroke="none" data-name="ItemsService">userId: number</text>
+<text x="0.0" y="283.5" stroke="none" data-name="ItemsService">createdAt: Date</text>
+<text x="0.0" y="298.5" stroke="none" data-name="ItemsService">updatedAt: Date</text>
+<text x="0.0" y="313.5" stroke="none" data-name="ItemsService">}&gt;</text>
+<text x="0.0" y="328.5" stroke="none" data-name="ItemsService">+update(): Promise&lt;{ id: number</text>
+<text x="0.0" y="343.5" stroke="none" data-name="ItemsService">body: string</text>
+<text x="0.0" y="358.5" stroke="none" data-name="ItemsService">status: Status</text>
+<text x="0.0" y="373.5" stroke="none" data-name="ItemsService">userId: number</text>
+<text x="0.0" y="388.5" stroke="none" data-name="ItemsService">createdAt: Date</text>
+<text x="0.0" y="403.5" stroke="none" data-name="ItemsService">updatedAt: Date</text>
+<text x="0.0" y="418.5" stroke="none" data-name="ItemsService">}&gt;</text>
+<text x="0.0" y="433.5" stroke="none" data-name="ItemsService">+delete(): Promise&lt;void&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="UserController">
+<g fill="#eee8d5" stroke="#33322E" data-name="UserController">
+<rect x="3882.0" y="221.5" height="70.0" width="187.0" data-name="UserController"></rect>
+<path d="M3882.0 252.5 L4069.0 252.5" fill="none" data-name="UserController"></path>
+<path d="M3882.0 260.5 L4069.0 260.5" fill="none" data-name="UserController"></path>
+</g>
+<g transform="translate(3882, 221.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UserController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UserController">
+<a id="../src/users/users.controller.ts.UserController" xlink:href="../src/users/users.controller.ts"><text x="85.5" y="13.5" stroke="none" text-anchor="middle" data-name="UserController">UserController</text></a>
+
+</g>
+</g>
+<g transform="translate(3882, 252.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserController">
+<g transform="translate(8, 8)" fill="#33322E" data-name="UserController">
+
+</g>
+</g>
+<g transform="translate(3882, 260.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UserController">
+<text x="0.0" y="13.5" stroke="none" data-name="UserController">+getProfile(): UserDto</text>
+
+</g>
+</g>
+</g>
+<g data-name="UsersModule">
+<g fill="#eee8d5" stroke="#33322E" data-name="UsersModule">
+<rect x="4109.0" y="233.0" height="47.0" width="120.0" data-name="UsersModule"></rect>
+<path d="M4109.0 264.0 L4229.0 264.0" fill="none" data-name="UsersModule"></path>
+<path d="M4109.0 272.0 L4229.0 272.0" fill="none" data-name="UsersModule"></path>
+</g>
+<g transform="translate(4109, 233)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UsersModule">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UsersModule">
+<a id="../src/users/users.module.ts.UsersModule" xlink:href="../src/users/users.module.ts"><text x="52.0" y="13.5" stroke="none" text-anchor="middle" data-name="UsersModule">UsersModule</text></a>
+
+</g>
+</g>
+<g transform="translate(4109, 264)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersModule">
+<g transform="translate(8, 8)" fill="#33322E" data-name="UsersModule">
+
+</g>
+</g>
+<g transform="translate(4109, 272)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersModule">
+<g transform="translate(8, 8)" fill="#33322E" data-name="UsersModule">
+
+</g>
+</g>
+</g>
+<g data-name="UsersService">
+<g fill="#eee8d5" stroke="#33322E" data-name="UsersService">
+<rect x="4269.0" y="172.5" height="168.0" width="279.0" data-name="UsersService"></rect>
+<path d="M4269.0 203.5 L4548.0 203.5" fill="none" data-name="UsersService"></path>
+<path d="M4269.0 234.5 L4548.0 234.5" fill="none" data-name="UsersService"></path>
+</g>
+<g transform="translate(4269, 172.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UsersService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UsersService">
+<a id="../src/users/users.service.ts.UsersService" xlink:href="../src/users/users.service.ts"><text x="131.5" y="13.5" stroke="none" text-anchor="middle" data-name="UsersService">UsersService</text></a>
+
+</g>
+</g>
+<g transform="translate(4269, 203.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UsersService">
+<text x="0.0" y="13.5" stroke="none" data-name="UsersService">-prisma: PrismaService</text>
+
+</g>
+</g>
+<g transform="translate(4269, 234.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UsersService">
+<text x="0.0" y="13.5" stroke="none" data-name="UsersService">+findOne(): Promise&lt;{ id: number</text>
+<text x="0.0" y="28.5" stroke="none" data-name="UsersService">username: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="UsersService">password: string</text>
+<text x="0.0" y="58.5" stroke="none" data-name="UsersService">createdAt: Date</text>
+<text x="0.0" y="73.5" stroke="none" data-name="UsersService">updatedAt: Date</text>
+<text x="0.0" y="88.5" stroke="none" data-name="UsersService">}&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="CreateItemDto">
+<g fill="#eee8d5" stroke="#33322E" data-name="CreateItemDto">
+<rect x="4588.0" y="214.0" height="85.0" width="134.0" data-name="CreateItemDto"></rect>
+<path d="M4588.0 245.0 L4722.0 245.0" fill="none" data-name="CreateItemDto"></path>
+<path d="M4588.0 291.0 L4722.0 291.0" fill="none" data-name="CreateItemDto"></path>
+</g>
+<g transform="translate(4588, 214)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="CreateItemDto">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CreateItemDto">
+<a id="../src/items/dto/create-item.dto.ts.CreateItemDto" xlink:href="../src/items/dto/create-item.dto.ts"><text x="59.0" y="13.5" stroke="none" text-anchor="middle" data-name="CreateItemDto">CreateItemDto</text></a>
+
+</g>
+</g>
+<g transform="translate(4588, 245)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CreateItemDto">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="CreateItemDto">
+<text x="0.0" y="13.5" stroke="none" data-name="CreateItemDto">+body: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="CreateItemDto">+status: Status</text>
+
+</g>
+</g>
+<g transform="translate(4588, 291)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CreateItemDto">
+<g transform="translate(8, 8)" fill="#33322E" data-name="CreateItemDto">
+
+</g>
+</g>
+</g>
+<g data-name="ItemDto">
+<g fill="#eee8d5" stroke="#33322E" data-name="ItemDto">
+<rect x="4762.0" y="184.0" height="145.0" width="154.0" data-name="ItemDto"></rect>
+<path d="M4762.0 215.0 L4916.0 215.0" fill="none" data-name="ItemDto"></path>
+<path d="M4762.0 321.0 L4916.0 321.0" fill="none" data-name="ItemDto"></path>
+</g>
+<g transform="translate(4762, 184)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ItemDto">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ItemDto">
+<a id="../src/items/dto/item.dto.ts.ItemDto" xlink:href="../src/items/dto/item.dto.ts"><text x="69.0" y="13.5" stroke="none" text-anchor="middle" data-name="ItemDto">ItemDto</text></a>
+
+</g>
+</g>
+<g transform="translate(4762, 215)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ItemDto">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ItemDto">
+<text x="0.0" y="13.5" stroke="none" data-name="ItemDto">+id: number</text>
+<text x="0.0" y="28.5" stroke="none" data-name="ItemDto">+body: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="ItemDto">+status: Status</text>
+<text x="0.0" y="58.5" stroke="none" data-name="ItemDto">+userId: number</text>
+<text x="0.0" y="73.5" stroke="none" data-name="ItemDto">+createdAt: Date</text>
+<text x="0.0" y="88.5" stroke="none" data-name="ItemDto">+updatedAt: Date</text>
+
+</g>
+</g>
+<g transform="translate(4762, 321)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ItemDto">
+<g transform="translate(8, 8)" fill="#33322E" data-name="ItemDto">
+
+</g>
+</g>
+</g>
+<g data-name="UpdateItemDto">
+<g fill="#eee8d5" stroke="#33322E" data-name="UpdateItemDto">
+<rect x="4956.0" y="214.0" height="85.0" width="134.0" data-name="UpdateItemDto"></rect>
+<path d="M4956.0 245.0 L5090.0 245.0" fill="none" data-name="UpdateItemDto"></path>
+<path d="M4956.0 291.0 L5090.0 291.0" fill="none" data-name="UpdateItemDto"></path>
+</g>
+<g transform="translate(4956, 214)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UpdateItemDto">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UpdateItemDto">
+<a id="../src/items/dto/update-item.dto.ts.UpdateItemDto" xlink:href="../src/items/dto/update-item.dto.ts"><text x="59.0" y="13.5" stroke="none" text-anchor="middle" data-name="UpdateItemDto">UpdateItemDto</text></a>
+
+</g>
+</g>
+<g transform="translate(4956, 245)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UpdateItemDto">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UpdateItemDto">
+<text x="0.0" y="13.5" stroke="none" data-name="UpdateItemDto">+body: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="UpdateItemDto">+status: Status</text>
+
+</g>
+</g>
+<g transform="translate(4956, 291)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UpdateItemDto">
+<g transform="translate(8, 8)" fill="#33322E" data-name="UpdateItemDto">
+
+</g>
+</g>
+</g>
+<g data-name="Configuration">
+<g fill="#eee8d5" stroke="#33322E" data-name="Configuration">
+<rect x="5130.0" y="221.5" height="70.0" width="332.0" data-name="Configuration"></rect>
+<path d="M5130.0 252.5 L5462.0 252.5" fill="none" data-name="Configuration"></path>
+<path d="M5130.0 283.5 L5462.0 283.5" fill="none" data-name="Configuration"></path>
+</g>
+<g transform="translate(5130, 221.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Configuration">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Configuration">
+<a id="../src/openapi/generated/runtime.ts.Configuration" xlink:href="../src/openapi/generated/runtime.ts"><text x="158.0" y="13.5" stroke="none" text-anchor="middle" data-name="Configuration">Configuration</text></a>
+
+</g>
+</g>
+<g transform="translate(5130, 252.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Configuration">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Configuration">
+<text x="0.0" y="13.5" stroke="none" data-name="Configuration">-configuration: ConfigurationParameters</text>
+
+</g>
+</g>
+<g transform="translate(5130, 283.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Configuration">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Configuration">
+
+</g>
+</g>
+</g>
+<g data-name="BaseAPI">
+<g fill="#eee8d5" stroke="#33322E" data-name="BaseAPI">
+<rect x="5502.0" y="127.5" height="258.0" width="509.0" data-name="BaseAPI"></rect>
+<path d="M5502.0 158.5 L6011.0 158.5" fill="none" data-name="BaseAPI"></path>
+<path d="M5502.0 234.5 L6011.0 234.5" fill="none" data-name="BaseAPI"></path>
+</g>
+<g transform="translate(5502, 127.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="BaseAPI">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="BaseAPI">
+<a id="../src/openapi/generated/runtime.ts.BaseAPI" xlink:href="../src/openapi/generated/runtime.ts"><text x="246.5" y="13.5" stroke="none" text-anchor="middle" data-name="BaseAPI">BaseAPI</text></a>
+
+</g>
+</g>
+<g transform="translate(5502, 158.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="BaseAPI">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="BaseAPI">
+<text x="0.0" y="13.5" stroke="none" data-name="BaseAPI">-static jsonRegex: RegExp</text>
+<text x="0.0" y="28.5" stroke="none" data-name="BaseAPI">-middleware: Middleware[]</text>
+<text x="0.0" y="43.5" stroke="none" data-name="BaseAPI">-fetchApi: (url: string, init: RequestInit) =&gt; Promise&lt;Response&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="BaseAPI">#configuration: Configuration</text>
+
+</g>
+</g>
+<g transform="translate(5502, 234.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="BaseAPI">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="BaseAPI">
+<text x="0.0" y="13.5" stroke="none" data-name="BaseAPI">+withMiddleware(): T</text>
+<text x="0.0" y="28.5" stroke="none" data-name="BaseAPI">+withPreMiddleware(): T</text>
+<text x="0.0" y="43.5" stroke="none" data-name="BaseAPI">+withPostMiddleware(): T</text>
+<text x="0.0" y="58.5" stroke="none" data-name="BaseAPI">#isJsonMime(): boolean</text>
+<text x="0.0" y="73.5" stroke="none" data-name="BaseAPI">#request(): Promise&lt;Response&gt;</text>
+<text x="0.0" y="88.5" stroke="none" data-name="BaseAPI">-createFetchParams(): Promise&lt;{ url: string</text>
+<text x="0.0" y="103.5" stroke="none" data-name="BaseAPI">init: RequestInit</text>
+<text x="0.0" y="118.5" stroke="none" data-name="BaseAPI">}&gt;</text>
+<text x="0.0" y="133.5" stroke="none" data-name="BaseAPI">-clone(): T</text>
+
+</g>
+</g>
+</g>
+<g data-name="ResponseError">
+<g fill="#eee8d5" stroke="#33322E" data-name="ResponseError">
+<rect x="6051.0" y="214.0" height="85.0" width="211.0" data-name="ResponseError"></rect>
+<path d="M6051.0 245.0 L6262.0 245.0" fill="none" data-name="ResponseError"></path>
+<path d="M6051.0 291.0 L6262.0 291.0" fill="none" data-name="ResponseError"></path>
+</g>
+<g transform="translate(6051, 214)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ResponseError">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ResponseError">
+<a id="../src/openapi/generated/runtime.ts.ResponseError" xlink:href="../src/openapi/generated/runtime.ts"><text x="97.5" y="13.5" stroke="none" text-anchor="middle" data-name="ResponseError">ResponseError</text></a>
+
+</g>
+</g>
+<g transform="translate(6051, 245)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ResponseError">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ResponseError">
+<text x="0.0" y="13.5" stroke="none" data-name="ResponseError">+name: &quot;ResponseError&quot;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="ResponseError">+response: Response</text>
+
+</g>
+</g>
+<g transform="translate(6051, 291)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ResponseError">
+<g transform="translate(8, 8)" fill="#33322E" data-name="ResponseError">
+
+</g>
+</g>
+</g>
+<g data-name="FetchError">
+<g fill="#eee8d5" stroke="#33322E" data-name="FetchError">
+<rect x="6302.0" y="214.0" height="85.0" width="175.0" data-name="FetchError"></rect>
+<path d="M6302.0 245.0 L6477.0 245.0" fill="none" data-name="FetchError"></path>
+<path d="M6302.0 291.0 L6477.0 291.0" fill="none" data-name="FetchError"></path>
+</g>
+<g transform="translate(6302, 214)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="FetchError">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="FetchError">
+<a id="../src/openapi/generated/runtime.ts.FetchError" xlink:href="../src/openapi/generated/runtime.ts"><text x="79.5" y="13.5" stroke="none" text-anchor="middle" data-name="FetchError">FetchError</text></a>
+
+</g>
+</g>
+<g transform="translate(6302, 245)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FetchError">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FetchError">
+<text x="0.0" y="13.5" stroke="none" data-name="FetchError">+name: &quot;FetchError&quot;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="FetchError">+cause: Error</text>
+
+</g>
+</g>
+<g transform="translate(6302, 291)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FetchError">
+<g transform="translate(8, 8)" fill="#33322E" data-name="FetchError">
+
+</g>
+</g>
+</g>
+<g data-name="RequiredError">
+<g fill="#eee8d5" stroke="#33322E" data-name="RequiredError">
+<rect x="6517.0" y="214.0" height="85.0" width="203.0" data-name="RequiredError"></rect>
+<path d="M6517.0 245.0 L6720.0 245.0" fill="none" data-name="RequiredError"></path>
+<path d="M6517.0 291.0 L6720.0 291.0" fill="none" data-name="RequiredError"></path>
+</g>
+<g transform="translate(6517, 214)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="RequiredError">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="RequiredError">
+<a id="../src/openapi/generated/runtime.ts.RequiredError" xlink:href="../src/openapi/generated/runtime.ts"><text x="93.5" y="13.5" stroke="none" text-anchor="middle" data-name="RequiredError">RequiredError</text></a>
+
+</g>
+</g>
+<g transform="translate(6517, 245)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RequiredError">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="RequiredError">
+<text x="0.0" y="13.5" stroke="none" data-name="RequiredError">+name: &quot;RequiredError&quot;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="RequiredError">+field: string</text>
+
+</g>
+</g>
+<g transform="translate(6517, 291)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RequiredError">
+<g transform="translate(8, 8)" fill="#33322E" data-name="RequiredError">
+
+</g>
+</g>
+</g>
+<g data-name="JSONApiResponse&lt;T&gt;">
+<g fill="#eee8d5" stroke="#33322E" data-name="JSONApiResponse&lt;T&gt;">
+<rect x="6760.0" y="202.5" height="108.0" width="329.0" data-name="JSONApiResponse&lt;T&gt;"></rect>
+<path d="M6760.0 233.5 L7089.0 233.5" fill="none" data-name="JSONApiResponse&lt;T&gt;"></path>
+<path d="M6760.0 279.5 L7089.0 279.5" fill="none" data-name="JSONApiResponse&lt;T&gt;"></path>
+</g>
+<g transform="translate(6760, 202.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="JSONApiResponse&lt;T&gt;">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="JSONApiResponse&lt;T&gt;">
+<a id="../src/openapi/generated/runtime.ts.JSONApiResponse&lt;T&gt;" xlink:href="../src/openapi/generated/runtime.ts"><text x="156.5" y="13.5" stroke="none" text-anchor="middle" data-name="JSONApiResponse&lt;T&gt;">JSONApiResponse&lt;T&gt;</text></a>
+
+</g>
+</g>
+<g transform="translate(6760, 233.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="JSONApiResponse&lt;T&gt;">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="JSONApiResponse&lt;T&gt;">
+<text x="0.0" y="13.5" stroke="none" data-name="JSONApiResponse&lt;T&gt;">+raw: Response</text>
+<text x="0.0" y="28.5" stroke="none" data-name="JSONApiResponse&lt;T&gt;">-transformer: ResponseTransformer&lt;T&gt;</text>
+
+</g>
+</g>
+<g transform="translate(6760, 279.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="JSONApiResponse&lt;T&gt;">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="JSONApiResponse&lt;T&gt;">
+<text x="0.0" y="13.5" stroke="none" data-name="JSONApiResponse&lt;T&gt;">+value(): Promise&lt;T&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="VoidApiResponse">
+<g fill="#eee8d5" stroke="#33322E" data-name="VoidApiResponse">
+<rect x="7129.0" y="210.0" height="93.0" width="208.0" data-name="VoidApiResponse"></rect>
+<path d="M7129.0 241.0 L7337.0 241.0" fill="none" data-name="VoidApiResponse"></path>
+<path d="M7129.0 272.0 L7337.0 272.0" fill="none" data-name="VoidApiResponse"></path>
+</g>
+<g transform="translate(7129, 210)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="VoidApiResponse">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="VoidApiResponse">
+<a id="../src/openapi/generated/runtime.ts.VoidApiResponse" xlink:href="../src/openapi/generated/runtime.ts"><text x="96.0" y="13.5" stroke="none" text-anchor="middle" data-name="VoidApiResponse">VoidApiResponse</text></a>
+
+</g>
+</g>
+<g transform="translate(7129, 241)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="VoidApiResponse">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="VoidApiResponse">
+<text x="0.0" y="13.5" stroke="none" data-name="VoidApiResponse">+raw: Response</text>
+
+</g>
+</g>
+<g transform="translate(7129, 272)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="VoidApiResponse">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="VoidApiResponse">
+<text x="0.0" y="13.5" stroke="none" data-name="VoidApiResponse">+value(): Promise&lt;void&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="BlobApiResponse">
+<g fill="#eee8d5" stroke="#33322E" data-name="BlobApiResponse">
+<rect x="7377.0" y="210.0" height="93.0" width="210.0" data-name="BlobApiResponse"></rect>
+<path d="M7377.0 241.0 L7587.0 241.0" fill="none" data-name="BlobApiResponse"></path>
+<path d="M7377.0 272.0 L7587.0 272.0" fill="none" data-name="BlobApiResponse"></path>
+</g>
+<g transform="translate(7377, 210)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="BlobApiResponse">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="BlobApiResponse">
+<a id="../src/openapi/generated/runtime.ts.BlobApiResponse" xlink:href="../src/openapi/generated/runtime.ts"><text x="97.0" y="13.5" stroke="none" text-anchor="middle" data-name="BlobApiResponse">BlobApiResponse</text></a>
+
+</g>
+</g>
+<g transform="translate(7377, 241)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="BlobApiResponse">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="BlobApiResponse">
+<text x="0.0" y="13.5" stroke="none" data-name="BlobApiResponse">+raw: Response</text>
+
+</g>
+</g>
+<g transform="translate(7377, 272)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="BlobApiResponse">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="BlobApiResponse">
+<text x="0.0" y="13.5" stroke="none" data-name="BlobApiResponse">+value(): Promise&lt;Blob&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="TextApiResponse">
+<g fill="#eee8d5" stroke="#33322E" data-name="TextApiResponse">
+<rect x="7627.0" y="210.0" height="93.0" width="219.0" data-name="TextApiResponse"></rect>
+<path d="M7627.0 241.0 L7846.0 241.0" fill="none" data-name="TextApiResponse"></path>
+<path d="M7627.0 272.0 L7846.0 272.0" fill="none" data-name="TextApiResponse"></path>
+</g>
+<g transform="translate(7627, 210)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TextApiResponse">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TextApiResponse">
+<a id="../src/openapi/generated/runtime.ts.TextApiResponse" xlink:href="../src/openapi/generated/runtime.ts"><text x="101.5" y="13.5" stroke="none" text-anchor="middle" data-name="TextApiResponse">TextApiResponse</text></a>
+
+</g>
+</g>
+<g transform="translate(7627, 241)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TextApiResponse">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TextApiResponse">
+<text x="0.0" y="13.5" stroke="none" data-name="TextApiResponse">+raw: Response</text>
+
+</g>
+</g>
+<g transform="translate(7627, 272)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TextApiResponse">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TextApiResponse">
+<text x="0.0" y="13.5" stroke="none" data-name="TextApiResponse">+value(): Promise&lt;string&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="ConfigurationParameters">
+<g fill="lightblue" stroke="#33322E" data-name="ConfigurationParameters">
+<rect x="7886.0" y="154.0" height="205.0" width="843.0" data-name="ConfigurationParameters"></rect>
+<path d="M7886.0 185.0 L8729.0 185.0" fill="none" data-name="ConfigurationParameters"></path>
+<path d="M7886.0 351.0 L8729.0 351.0" fill="none" data-name="ConfigurationParameters"></path>
+</g>
+<g transform="translate(7886, 154)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ConfigurationParameters">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ConfigurationParameters">
+<a id="../src/openapi/generated/runtime.ts.ConfigurationParameters" xlink:href="../src/openapi/generated/runtime.ts"><text x="413.5" y="13.5" stroke="none" text-anchor="middle" data-name="ConfigurationParameters">ConfigurationParameters</text></a>
+
+</g>
+</g>
+<g transform="translate(7886, 185)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ConfigurationParameters">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ConfigurationParameters">
+<text x="0.0" y="13.5" stroke="none" data-name="ConfigurationParameters">+basePath?: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="ConfigurationParameters">+fetchApi?: (input: RequestInfo | URL, init?: RequestInit) =&gt; Promise&lt;Response&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="ConfigurationParameters">+middleware?: Middleware[]</text>
+<text x="0.0" y="58.5" stroke="none" data-name="ConfigurationParameters">+queryParamsStringify?: (params: HTTPQuery) =&gt; string</text>
+<text x="0.0" y="73.5" stroke="none" data-name="ConfigurationParameters">+username?: string</text>
+<text x="0.0" y="88.5" stroke="none" data-name="ConfigurationParameters">+password?: string</text>
+<text x="0.0" y="103.5" stroke="none" data-name="ConfigurationParameters">+apiKey?: string | Promise&lt;string&gt; | ((name: string) =&gt; string | Promise&lt;string&gt;)</text>
+<text x="0.0" y="118.5" stroke="none" data-name="ConfigurationParameters">+accessToken?: string | Promise&lt;string&gt; | ((name?: string, scopes?: string[]) =&gt; string | Promise&lt;string&gt;)</text>
+<text x="0.0" y="133.5" stroke="none" data-name="ConfigurationParameters">+headers?: HTTPHeaders</text>
+<text x="0.0" y="148.5" stroke="none" data-name="ConfigurationParameters">+credentials?: RequestCredentials</text>
+
+</g>
+</g>
+<g transform="translate(7886, 351)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ConfigurationParameters">
+<g transform="translate(8, 8)" fill="#33322E" data-name="ConfigurationParameters">
+
+</g>
+</g>
+</g>
+<g data-name="FetchParams">
+<g fill="lightblue" stroke="#33322E" data-name="FetchParams">
+<rect x="8769.0" y="214.0" height="85.0" width="149.0" data-name="FetchParams"></rect>
+<path d="M8769.0 245.0 L8918.0 245.0" fill="none" data-name="FetchParams"></path>
+<path d="M8769.0 291.0 L8918.0 291.0" fill="none" data-name="FetchParams"></path>
+</g>
+<g transform="translate(8769, 214)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FetchParams">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="FetchParams">
+<a id="../src/openapi/generated/runtime.ts.FetchParams" xlink:href="../src/openapi/generated/runtime.ts"><text x="66.5" y="13.5" stroke="none" text-anchor="middle" data-name="FetchParams">FetchParams</text></a>
+
+</g>
+</g>
+<g transform="translate(8769, 245)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FetchParams">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="FetchParams">
+<text x="0.0" y="13.5" stroke="none" data-name="FetchParams">+url: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="FetchParams">+init: RequestInit</text>
+
+</g>
+</g>
+<g transform="translate(8769, 291)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="FetchParams">
+<g transform="translate(8, 8)" fill="#33322E" data-name="FetchParams">
+
+</g>
+</g>
+</g>
+<g data-name="RequestOpts">
+<g fill="lightblue" stroke="#33322E" data-name="RequestOpts">
+<rect x="8958.0" y="191.5" height="130.0" width="211.0" data-name="RequestOpts"></rect>
+<path d="M8958.0 222.5 L9169.0 222.5" fill="none" data-name="RequestOpts"></path>
+<path d="M8958.0 313.5 L9169.0 313.5" fill="none" data-name="RequestOpts"></path>
+</g>
+<g transform="translate(8958, 191.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RequestOpts">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="RequestOpts">
+<a id="../src/openapi/generated/runtime.ts.RequestOpts" xlink:href="../src/openapi/generated/runtime.ts"><text x="97.5" y="13.5" stroke="none" text-anchor="middle" data-name="RequestOpts">RequestOpts</text></a>
+
+</g>
+</g>
+<g transform="translate(8958, 222.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RequestOpts">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="RequestOpts">
+<text x="0.0" y="13.5" stroke="none" data-name="RequestOpts">+path: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="RequestOpts">+method: HTTPMethod</text>
+<text x="0.0" y="43.5" stroke="none" data-name="RequestOpts">+headers: HTTPHeaders</text>
+<text x="0.0" y="58.5" stroke="none" data-name="RequestOpts">+query?: HTTPQuery</text>
+<text x="0.0" y="73.5" stroke="none" data-name="RequestOpts">+body?: any</text>
+
+</g>
+</g>
+<g transform="translate(8958, 313.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RequestOpts">
+<g transform="translate(8, 8)" fill="#33322E" data-name="RequestOpts">
+
+</g>
+</g>
+</g>
+<g data-name="Consume">
+<g fill="lightblue" stroke="#33322E" data-name="Consume">
+<rect x="9209.0" y="221.5" height="70.0" width="178.0" data-name="Consume"></rect>
+<path d="M9209.0 252.5 L9387.0 252.5" fill="none" data-name="Consume"></path>
+<path d="M9209.0 283.5 L9387.0 283.5" fill="none" data-name="Consume"></path>
+</g>
+<g transform="translate(9209, 221.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Consume">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Consume">
+<a id="../src/openapi/generated/runtime.ts.Consume" xlink:href="../src/openapi/generated/runtime.ts"><text x="81.0" y="13.5" stroke="none" text-anchor="middle" data-name="Consume">Consume</text></a>
+
+</g>
+</g>
+<g transform="translate(9209, 252.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Consume">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Consume">
+<text x="0.0" y="13.5" stroke="none" data-name="Consume">+contentType: string</text>
+
+</g>
+</g>
+<g transform="translate(9209, 283.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Consume">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Consume">
+
+</g>
+</g>
+</g>
+<g data-name="RequestContext">
+<g fill="lightblue" stroke="#33322E" data-name="RequestContext">
+<rect x="9427.0" y="206.5" height="100.0" width="618.0" data-name="RequestContext"></rect>
+<path d="M9427.0 237.5 L10045.0 237.5" fill="none" data-name="RequestContext"></path>
+<path d="M9427.0 298.5 L10045.0 298.5" fill="none" data-name="RequestContext"></path>
+</g>
+<g transform="translate(9427, 206.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RequestContext">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="RequestContext">
+<a id="../src/openapi/generated/runtime.ts.RequestContext" xlink:href="../src/openapi/generated/runtime.ts"><text x="301.0" y="13.5" stroke="none" text-anchor="middle" data-name="RequestContext">RequestContext</text></a>
+
+</g>
+</g>
+<g transform="translate(9427, 237.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RequestContext">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="RequestContext">
+<text x="0.0" y="13.5" stroke="none" data-name="RequestContext">+fetch: (input: RequestInfo | URL, init?: RequestInit) =&gt; Promise&lt;Response&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="RequestContext">+url: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="RequestContext">+init: RequestInit</text>
+
+</g>
+</g>
+<g transform="translate(9427, 298.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RequestContext">
+<g transform="translate(8, 8)" fill="#33322E" data-name="RequestContext">
+
+</g>
+</g>
+</g>
+<g data-name="ResponseContext">
+<g fill="lightblue" stroke="#33322E" data-name="ResponseContext">
+<rect x="10085.0" y="199.0" height="115.0" width="618.0" data-name="ResponseContext"></rect>
+<path d="M10085.0 230.0 L10703.0 230.0" fill="none" data-name="ResponseContext"></path>
+<path d="M10085.0 306.0 L10703.0 306.0" fill="none" data-name="ResponseContext"></path>
+</g>
+<g transform="translate(10085, 199)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ResponseContext">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ResponseContext">
+<a id="../src/openapi/generated/runtime.ts.ResponseContext" xlink:href="../src/openapi/generated/runtime.ts"><text x="301.0" y="13.5" stroke="none" text-anchor="middle" data-name="ResponseContext">ResponseContext</text></a>
+
+</g>
+</g>
+<g transform="translate(10085, 230)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ResponseContext">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ResponseContext">
+<text x="0.0" y="13.5" stroke="none" data-name="ResponseContext">+fetch: (input: RequestInfo | URL, init?: RequestInit) =&gt; Promise&lt;Response&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="ResponseContext">+url: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="ResponseContext">+init: RequestInit</text>
+<text x="0.0" y="58.5" stroke="none" data-name="ResponseContext">+response: Response</text>
+
+</g>
+</g>
+<g transform="translate(10085, 306)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ResponseContext">
+<g transform="translate(8, 8)" fill="#33322E" data-name="ResponseContext">
+
+</g>
+</g>
+</g>
+<g data-name="ErrorContext">
+<g fill="lightblue" stroke="#33322E" data-name="ErrorContext">
+<rect x="10743.0" y="191.5" height="130.0" width="618.0" data-name="ErrorContext"></rect>
+<path d="M10743.0 222.5 L11361.0 222.5" fill="none" data-name="ErrorContext"></path>
+<path d="M10743.0 313.5 L11361.0 313.5" fill="none" data-name="ErrorContext"></path>
+</g>
+<g transform="translate(10743, 191.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ErrorContext">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ErrorContext">
+<a id="../src/openapi/generated/runtime.ts.ErrorContext" xlink:href="../src/openapi/generated/runtime.ts"><text x="301.0" y="13.5" stroke="none" text-anchor="middle" data-name="ErrorContext">ErrorContext</text></a>
+
+</g>
+</g>
+<g transform="translate(10743, 222.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ErrorContext">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ErrorContext">
+<text x="0.0" y="13.5" stroke="none" data-name="ErrorContext">+fetch: (input: RequestInfo | URL, init?: RequestInit) =&gt; Promise&lt;Response&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="ErrorContext">+url: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="ErrorContext">+init: RequestInit</text>
+<text x="0.0" y="58.5" stroke="none" data-name="ErrorContext">+error: unknown</text>
+<text x="0.0" y="73.5" stroke="none" data-name="ErrorContext">+response?: Response</text>
+
+</g>
+</g>
+<g transform="translate(10743, 313.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ErrorContext">
+<g transform="translate(8, 8)" fill="#33322E" data-name="ErrorContext">
+
+</g>
+</g>
+</g>
+<g data-name="Middleware">
+<g fill="lightblue" stroke="#33322E" data-name="Middleware">
+<rect x="11401.0" y="206.5" height="100.0" width="319.0" data-name="Middleware"></rect>
+<path d="M11401.0 237.5 L11720.0 237.5" fill="none" data-name="Middleware"></path>
+<path d="M11401.0 245.5 L11720.0 245.5" fill="none" data-name="Middleware"></path>
+</g>
+<g transform="translate(11401, 206.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Middleware">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Middleware">
+<a id="../src/openapi/generated/runtime.ts.Middleware" xlink:href="../src/openapi/generated/runtime.ts"><text x="151.5" y="13.5" stroke="none" text-anchor="middle" data-name="Middleware">Middleware</text></a>
+
+</g>
+</g>
+<g transform="translate(11401, 237.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Middleware">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Middleware">
+
+</g>
+</g>
+<g transform="translate(11401, 245.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Middleware">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Middleware">
+<text x="0.0" y="13.5" stroke="none" data-name="Middleware">+pre(): Promise&lt;void | FetchParams&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Middleware">+post(): Promise&lt;void | Response&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Middleware">+onError(): Promise&lt;void | Response&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="ApiResponse&lt;T&gt;">
+<g fill="lightblue" stroke="#33322E" data-name="ApiResponse&lt;T&gt;">
+<rect x="11760.0" y="210.0" height="93.0" width="185.0" data-name="ApiResponse&lt;T&gt;"></rect>
+<path d="M11760.0 241.0 L11945.0 241.0" fill="none" data-name="ApiResponse&lt;T&gt;"></path>
+<path d="M11760.0 272.0 L11945.0 272.0" fill="none" data-name="ApiResponse&lt;T&gt;"></path>
+</g>
+<g transform="translate(11760, 210)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ApiResponse&lt;T&gt;">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ApiResponse&lt;T&gt;">
+<a id="../src/openapi/generated/runtime.ts.ApiResponse&lt;T&gt;" xlink:href="../src/openapi/generated/runtime.ts"><text x="84.5" y="13.5" stroke="none" text-anchor="middle" data-name="ApiResponse&lt;T&gt;">ApiResponse&lt;T&gt;</text></a>
+
+</g>
+</g>
+<g transform="translate(11760, 241)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ApiResponse&lt;T&gt;">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ApiResponse&lt;T&gt;">
+<text x="0.0" y="13.5" stroke="none" data-name="ApiResponse&lt;T&gt;">+raw: Response</text>
+
+</g>
+</g>
+<g transform="translate(11760, 272)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ApiResponse&lt;T&gt;">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ApiResponse&lt;T&gt;">
+<text x="0.0" y="13.5" stroke="none" data-name="ApiResponse&lt;T&gt;">+value(): Promise&lt;T&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="ResponseTransformer&lt;T&gt;">
+<g fill="lightblue" stroke="#33322E" data-name="ResponseTransformer&lt;T&gt;">
+<rect x="11985.0" y="233.0" height="47.0" width="222.0" data-name="ResponseTransformer&lt;T&gt;"></rect>
+<path d="M11985.0 264.0 L12207.0 264.0" fill="none" data-name="ResponseTransformer&lt;T&gt;"></path>
+<path d="M11985.0 272.0 L12207.0 272.0" fill="none" data-name="ResponseTransformer&lt;T&gt;"></path>
+</g>
+<g transform="translate(11985, 233)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ResponseTransformer&lt;T&gt;">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ResponseTransformer&lt;T&gt;">
+<a id="../src/openapi/generated/runtime.ts.ResponseTransformer&lt;T&gt;" xlink:href="../src/openapi/generated/runtime.ts"><text x="103.0" y="13.5" stroke="none" text-anchor="middle" data-name="ResponseTransformer&lt;T&gt;">ResponseTransformer&lt;T&gt;</text></a>
+
+</g>
+</g>
+<g transform="translate(11985, 264)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ResponseTransformer&lt;T&gt;">
+<g transform="translate(8, 8)" fill="#33322E" data-name="ResponseTransformer&lt;T&gt;">
+
+</g>
+</g>
+<g transform="translate(11985, 272)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ResponseTransformer&lt;T&gt;">
+<g transform="translate(8, 8)" fill="#33322E" data-name="ResponseTransformer&lt;T&gt;">
+
+</g>
+</g>
+</g>
+<g data-name="HTTPHeaders">
+<g fill="lightgray" stroke="#33322E" data-name="HTTPHeaders">
+<rect x="12247.0" y="233.0" height="47.0" width="126.0" data-name="HTTPHeaders"></rect>
+<path d="M12247.0 264.0 L12373.0 264.0" fill="none" data-name="HTTPHeaders"></path>
+<path d="M12247.0 272.0 L12373.0 272.0" fill="none" data-name="HTTPHeaders"></path>
+</g>
+<g transform="translate(12247, 233)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="HTTPHeaders">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="HTTPHeaders">
+<a id="../src/openapi/generated/runtime.ts.HTTPHeaders" xlink:href="../src/openapi/generated/runtime.ts"><text x="55.0" y="13.5" stroke="none" text-anchor="middle" data-name="HTTPHeaders">HTTPHeaders</text></a>
+
+</g>
+</g>
+<g transform="translate(12247, 264)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="HTTPHeaders">
+<g transform="translate(8, 8)" fill="#33322E" data-name="HTTPHeaders">
+
+</g>
+</g>
+<g transform="translate(12247, 272)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="HTTPHeaders">
+<g transform="translate(8, 8)" fill="#33322E" data-name="HTTPHeaders">
+
+</g>
+</g>
+</g>
+<g data-name="HTTPQuery">
+<g fill="lightgray" stroke="#33322E" data-name="HTTPQuery">
+<rect x="12413.0" y="233.0" height="47.0" width="107.0" data-name="HTTPQuery"></rect>
+<path d="M12413.0 264.0 L12520.0 264.0" fill="none" data-name="HTTPQuery"></path>
+<path d="M12413.0 272.0 L12520.0 272.0" fill="none" data-name="HTTPQuery"></path>
+</g>
+<g transform="translate(12413, 233)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="HTTPQuery">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="HTTPQuery">
+<a id="../src/openapi/generated/runtime.ts.HTTPQuery" xlink:href="../src/openapi/generated/runtime.ts"><text x="45.5" y="13.5" stroke="none" text-anchor="middle" data-name="HTTPQuery">HTTPQuery</text></a>
+
+</g>
+</g>
+<g transform="translate(12413, 264)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="HTTPQuery">
+<g transform="translate(8, 8)" fill="#33322E" data-name="HTTPQuery">
+
+</g>
+</g>
+<g transform="translate(12413, 272)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="HTTPQuery">
+<g transform="translate(8, 8)" fill="#33322E" data-name="HTTPQuery">
+
+</g>
+</g>
+</g>
+<g data-name="HTTPRequestInit">
+<g fill="lightgray" stroke="#33322E" data-name="HTTPRequestInit">
+<rect x="12560.0" y="199.0" height="115.0" width="289.0" data-name="HTTPRequestInit"></rect>
+<path d="M12560.0 230.0 L12849.0 230.0" fill="none" data-name="HTTPRequestInit"></path>
+<path d="M12560.0 306.0 L12849.0 306.0" fill="none" data-name="HTTPRequestInit"></path>
+</g>
+<g transform="translate(12560, 199)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="HTTPRequestInit">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="HTTPRequestInit">
+<a id="../src/openapi/generated/runtime.ts.HTTPRequestInit" xlink:href="../src/openapi/generated/runtime.ts"><text x="136.5" y="13.5" stroke="none" text-anchor="middle" data-name="HTTPRequestInit">HTTPRequestInit</text></a>
+
+</g>
+</g>
+<g transform="translate(12560, 230)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="HTTPRequestInit">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="HTTPRequestInit">
+<text x="0.0" y="13.5" stroke="none" data-name="HTTPRequestInit">+headers?: HTTPHeaders</text>
+<text x="0.0" y="28.5" stroke="none" data-name="HTTPRequestInit">+method: HTTPMethod</text>
+<text x="0.0" y="43.5" stroke="none" data-name="HTTPRequestInit">+credentials?: RequestCredentials</text>
+<text x="0.0" y="58.5" stroke="none" data-name="HTTPRequestInit">+body?: any</text>
+
+</g>
+</g>
+<g transform="translate(12560, 306)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="HTTPRequestInit">
+<g transform="translate(8, 8)" fill="#33322E" data-name="HTTPRequestInit">
+
+</g>
+</g>
+</g>
+<g data-name="UserDto">
+<g fill="#eee8d5" stroke="#33322E" data-name="UserDto">
+<rect x="12889.0" y="199.0" height="115.0" width="159.0" data-name="UserDto"></rect>
+<path d="M12889.0 230.0 L13048.0 230.0" fill="none" data-name="UserDto"></path>
+<path d="M12889.0 306.0 L13048.0 306.0" fill="none" data-name="UserDto"></path>
+</g>
+<g transform="translate(12889, 199)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UserDto">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UserDto">
+<a id="../src/users/dto/user.dto.ts.UserDto" xlink:href="../src/users/dto/user.dto.ts"><text x="71.5" y="13.5" stroke="none" text-anchor="middle" data-name="UserDto">UserDto</text></a>
+
+</g>
+</g>
+<g transform="translate(12889, 230)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserDto">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UserDto">
+<text x="0.0" y="13.5" stroke="none" data-name="UserDto">+id: number</text>
+<text x="0.0" y="28.5" stroke="none" data-name="UserDto">+username: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="UserDto">+createdAt: Date</text>
+<text x="0.0" y="58.5" stroke="none" data-name="UserDto">+updatedAt: Date</text>
+
+</g>
+</g>
+<g transform="translate(12889, 306)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserDto">
+<g transform="translate(8, 8)" fill="#33322E" data-name="UserDto">
+
+</g>
+</g>
+</g>
+<g data-name="AppApi">
+<g fill="#eee8d5" stroke="#33322E" data-name="AppApi">
+<rect x="5460.5" y="553.0" height="295.0" width="592.0" data-name="AppApi"></rect>
+<path d="M5460.5 584.0 L6052.5 584.0" fill="none" data-name="AppApi"></path>
+<path d="M5460.5 592.0 L6052.5 592.0" fill="none" data-name="AppApi"></path>
+</g>
+<g transform="translate(5460.5, 553)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AppApi">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AppApi">
+<a id="../src/openapi/generated/apis/AppApi.ts.AppApi" xlink:href="../src/openapi/generated/apis/AppApi.ts"><text x="288.0" y="13.5" stroke="none" text-anchor="middle" data-name="AppApi">AppApi</text></a>
+
+</g>
+</g>
+<g transform="translate(5460.5, 584)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AppApi">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AppApi">
+
+</g>
+</g>
+<g transform="translate(5460.5, 592)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AppApi">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AppApi">
+<text x="0.0" y="13.5" stroke="none" data-name="AppApi">+appControllerGetHelloRaw(): Promise&lt;ApiResponse&lt;void&gt;&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="AppApi">+appControllerGetHello(): Promise&lt;void&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="AppApi">+authControllerLoginRaw(): Promise&lt;ApiResponse&lt;void&gt;&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="AppApi">+authControllerLogin(): Promise&lt;void&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="AppApi">+findAllItemsRaw(): Promise&lt;ApiResponse&lt;ItemDto[]&gt;&gt;</text>
+<text x="0.0" y="88.5" stroke="none" data-name="AppApi">+findAllItems(): Promise&lt;ItemDto[]&gt;</text>
+<text x="0.0" y="103.5" stroke="none" data-name="AppApi">+itemsControllerCreateRaw(): Promise&lt;ApiResponse&lt;void&gt;&gt;</text>
+<text x="0.0" y="118.5" stroke="none" data-name="AppApi">+itemsControllerCreate(): Promise&lt;void&gt;</text>
+<text x="0.0" y="133.5" stroke="none" data-name="AppApi">+itemsControllerDeleteRaw(): Promise&lt;ApiResponse&lt;void&gt;&gt;</text>
+<text x="0.0" y="148.5" stroke="none" data-name="AppApi">+itemsControllerDelete(): Promise&lt;void&gt;</text>
+<text x="0.0" y="163.5" stroke="none" data-name="AppApi">+itemsControllerFindByIdRaw(): Promise&lt;ApiResponse&lt;void&gt;&gt;</text>
+<text x="0.0" y="178.5" stroke="none" data-name="AppApi">+itemsControllerFindById(): Promise&lt;void&gt;</text>
+<text x="0.0" y="193.5" stroke="none" data-name="AppApi">+itemsControllerUpdateToDoStatusRaw(): Promise&lt;ApiResponse&lt;void&gt;&gt;</text>
+<text x="0.0" y="208.5" stroke="none" data-name="AppApi">+itemsControllerUpdateToDoStatus(): Promise&lt;void&gt;</text>
+<text x="0.0" y="223.5" stroke="none" data-name="AppApi">+userControllerGetProfileRaw(): Promise&lt;ApiResponse&lt;void&gt;&gt;</text>
+<text x="0.0" y="238.5" stroke="none" data-name="AppApi">+userControllerGetProfile(): Promise&lt;void&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="ItemsControllerCreateRequest">
+<g fill="lightblue" stroke="#33322E" data-name="ItemsControllerCreateRequest">
+<rect x="13088.0" y="221.5" height="70.0" width="261.0" data-name="ItemsControllerCreateRequest"></rect>
+<path d="M13088.0 252.5 L13349.0 252.5" fill="none" data-name="ItemsControllerCreateRequest"></path>
+<path d="M13088.0 283.5 L13349.0 283.5" fill="none" data-name="ItemsControllerCreateRequest"></path>
+</g>
+<g transform="translate(13088, 221.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ItemsControllerCreateRequest">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ItemsControllerCreateRequest">
+<a id="../src/openapi/generated/apis/AppApi.ts.ItemsControllerCreateRequest" xlink:href="../src/openapi/generated/apis/AppApi.ts"><text x="122.5" y="13.5" stroke="none" text-anchor="middle" data-name="ItemsControllerCreateRequest">ItemsControllerCreateRequest</text></a>
+
+</g>
+</g>
+<g transform="translate(13088, 252.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ItemsControllerCreateRequest">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ItemsControllerCreateRequest">
+<text x="0.0" y="13.5" stroke="none" data-name="ItemsControllerCreateRequest">+createItemDto: CreateItemDto</text>
+
+</g>
+</g>
+<g transform="translate(13088, 283.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ItemsControllerCreateRequest">
+<g transform="translate(8, 8)" fill="#33322E" data-name="ItemsControllerCreateRequest">
+
+</g>
+</g>
+</g>
+<g data-name="ItemsControllerDeleteRequest">
+<g fill="lightblue" stroke="#33322E" data-name="ItemsControllerDeleteRequest">
+<rect x="13389.0" y="221.5" height="70.0" width="253.0" data-name="ItemsControllerDeleteRequest"></rect>
+<path d="M13389.0 252.5 L13642.0 252.5" fill="none" data-name="ItemsControllerDeleteRequest"></path>
+<path d="M13389.0 283.5 L13642.0 283.5" fill="none" data-name="ItemsControllerDeleteRequest"></path>
+</g>
+<g transform="translate(13389, 221.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ItemsControllerDeleteRequest">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ItemsControllerDeleteRequest">
+<a id="../src/openapi/generated/apis/AppApi.ts.ItemsControllerDeleteRequest" xlink:href="../src/openapi/generated/apis/AppApi.ts"><text x="118.5" y="13.5" stroke="none" text-anchor="middle" data-name="ItemsControllerDeleteRequest">ItemsControllerDeleteRequest</text></a>
+
+</g>
+</g>
+<g transform="translate(13389, 252.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ItemsControllerDeleteRequest">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ItemsControllerDeleteRequest">
+<text x="0.0" y="13.5" stroke="none" data-name="ItemsControllerDeleteRequest">+id: number</text>
+
+</g>
+</g>
+<g transform="translate(13389, 283.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ItemsControllerDeleteRequest">
+<g transform="translate(8, 8)" fill="#33322E" data-name="ItemsControllerDeleteRequest">
+
+</g>
+</g>
+</g>
+<g data-name="ItemsControllerFindByIdRequest">
+<g fill="lightblue" stroke="#33322E" data-name="ItemsControllerFindByIdRequest">
+<rect x="13682.0" y="221.5" height="70.0" width="271.0" data-name="ItemsControllerFindByIdRequest"></rect>
+<path d="M13682.0 252.5 L13953.0 252.5" fill="none" data-name="ItemsControllerFindByIdRequest"></path>
+<path d="M13682.0 283.5 L13953.0 283.5" fill="none" data-name="ItemsControllerFindByIdRequest"></path>
+</g>
+<g transform="translate(13682, 221.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ItemsControllerFindByIdRequest">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ItemsControllerFindByIdRequest">
+<a id="../src/openapi/generated/apis/AppApi.ts.ItemsControllerFindByIdRequest" xlink:href="../src/openapi/generated/apis/AppApi.ts"><text x="127.5" y="13.5" stroke="none" text-anchor="middle" data-name="ItemsControllerFindByIdRequest">ItemsControllerFindByIdRequest</text></a>
+
+</g>
+</g>
+<g transform="translate(13682, 252.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ItemsControllerFindByIdRequest">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ItemsControllerFindByIdRequest">
+<text x="0.0" y="13.5" stroke="none" data-name="ItemsControllerFindByIdRequest">+id: number</text>
+
+</g>
+</g>
+<g transform="translate(13682, 283.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ItemsControllerFindByIdRequest">
+<g transform="translate(8, 8)" fill="#33322E" data-name="ItemsControllerFindByIdRequest">
+
+</g>
+</g>
+</g>
+<g data-name="ItemsControllerUpdateToDoStatusRequest">
+<g fill="lightblue" stroke="#33322E" data-name="ItemsControllerUpdateToDoStatusRequest">
+<rect x="13993.0" y="214.0" height="85.0" width="351.0" data-name="ItemsControllerUpdateToDoStatusRequest"></rect>
+<path d="M13993.0 245.0 L14344.0 245.0" fill="none" data-name="ItemsControllerUpdateToDoStatusRequest"></path>
+<path d="M13993.0 291.0 L14344.0 291.0" fill="none" data-name="ItemsControllerUpdateToDoStatusRequest"></path>
+</g>
+<g transform="translate(13993, 214)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ItemsControllerUpdateToDoStatusRequest">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ItemsControllerUpdateToDoStatusRequest">
+<a id="../src/openapi/generated/apis/AppApi.ts.ItemsControllerUpdateToDoStatusRequest" xlink:href="../src/openapi/generated/apis/AppApi.ts"><text x="167.5" y="13.5" stroke="none" text-anchor="middle" data-name="ItemsControllerUpdateToDoStatusRequest">ItemsControllerUpdateToDoStatusRequest</text></a>
+
+</g>
+</g>
+<g transform="translate(13993, 245)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ItemsControllerUpdateToDoStatusRequest">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ItemsControllerUpdateToDoStatusRequest">
+<text x="0.0" y="13.5" stroke="none" data-name="ItemsControllerUpdateToDoStatusRequest">+id: number</text>
+<text x="0.0" y="28.5" stroke="none" data-name="ItemsControllerUpdateToDoStatusRequest">+updateItemDto: UpdateItemDto</text>
+
+</g>
+</g>
+<g transform="translate(13993, 291)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ItemsControllerUpdateToDoStatusRequest">
+<g transform="translate(8, 8)" fill="#33322E" data-name="ItemsControllerUpdateToDoStatusRequest">
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

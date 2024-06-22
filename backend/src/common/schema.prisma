@@ -5,13 +5,13 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["prismaSchemaFolder"]
 }
 
 generator markdown {
   provider = "prisma-markdown"
-  output   = "../docs/ERD.md"
+  output   = "./docs/ERD.md"
   title    = "sample"
 }
 
@@ -21,7 +21,7 @@ datasource db {
 }
 
 model Test {
-  id    Int     @id @default(autoincrement())
-  title  String
-  body String
+  id    Int    @id @default(autoincrement())
+  title String
+  body  String
 }

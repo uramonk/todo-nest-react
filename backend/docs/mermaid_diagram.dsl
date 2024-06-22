@@ -5,6 +5,7 @@ class AppController{
             -appService: AppService
             +getHello() string
         }
+AppController  --  AppService
 class AppModule{
             
             
@@ -23,6 +24,7 @@ class AuthController{
             -authService: AuthService
             +login() Promise~{ access_token: string; }~
         }
+AuthController  --  AuthService
 class AuthModule{
             
             
@@ -57,6 +59,7 @@ class LocalStrategy{
             +validate() Promise~any~
         }
 Strategy<|--LocalStrategy
+LocalStrategy  --  AuthService
 class ItemsController{
             -itemsService: ItemsService
             +findAll() Promise~ItemDto[]~
@@ -65,6 +68,7 @@ class ItemsController{
 +updateToDoStatus() Promise~ItemDto~
 +delete() Promise~void~
         }
+ItemsController  --  ItemsService
 class ItemsModule{
             
             
@@ -250,6 +254,14 @@ class HTTPRequestInit {
 +body?: any
             
         }
+Configuration  --  ConfigurationParameters
+BaseAPI  -- "0..*" Middleware
+BaseAPI  --  Configuration
+ConfigurationParameters  -- "0..*" Middleware
+ConfigurationParameters  --  HTTPHeaders
+RequestOpts  --  HTTPHeaders
+RequestOpts  --  HTTPQuery
+HTTPRequestInit  --  HTTPHeaders
 class UserDto{
             +id: number
 +username: string
@@ -298,6 +310,8 @@ class ItemsControllerUpdateToDoStatusRequest {
             
         }
 BaseAPI<|--AppApi
+ItemsControllerCreateRequest  --  CreateItemDto
+ItemsControllerUpdateToDoStatusRequest  --  UpdateItemDto
 class CreateItemDto {
             <<interface>>
             +body: string

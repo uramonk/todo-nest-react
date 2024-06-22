@@ -23,7 +23,7 @@
     "test:e2e": "vitest run --config ./vitest.config.e2e.ts",
     "openapi:export": "ts-node -r tsconfig-paths/register ./src/openapi/generate.ts",
     "openapi:gen-client": "openapi-generator-cli generate -i ./src/openapi/generated/openapi.yml -g typescript-fetch -o ../packages/api --openapitools ./src/openapi/generated/openapitools.json",
-    "uml": "tsuml2 --glob \"src/**/*.ts\" --outFile \"./docs/uml.svg\" --outMermaidDsl \"./docs/uml.dsl\""
+    "uml": "tsuml2 -m --glob \"src/**/*.ts\" --outFile \"./docs/diagram.svg\" --outMermaidDsl \"./docs/mermaid_diagram.dsl\""
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

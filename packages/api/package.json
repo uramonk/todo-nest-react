@@ -2,7 +2,14 @@
   "name": "tnr-api-client",
   "version": "0.0.1",
   "description": "OpenAPI Client",
-  "main": "index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "scripts": {
+    "build": "rimraf ./dist && tsc -p tsconfig.build.json"
+  }
 }

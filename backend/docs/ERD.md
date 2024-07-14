@@ -7,6 +7,13 @@
 ## ToDos
 ```mermaid
 erDiagram
+"User" {
+  Int id PK
+  String username UK
+  String password
+  DateTime createdAt
+  DateTime updatedAt
+}
 "Item" {
   Int id PK
   String body
@@ -15,15 +22,18 @@ erDiagram
   DateTime createdAt
   DateTime updatedAt
 }
-"User" {
-  Int id PK
-  String username UK
-  String password
-  DateTime createdAt
-  DateTime updatedAt
-}
 "Item" }o--|| "User" : user
 ```
+
+### `User`
+User model.
+
+**Properties**
+  - `id`: Primary Key. Auto-incremented.
+  - `username`: Unique username.
+  - `password`: Password.
+  - `createdAt`: Created at.
+  - `updatedAt`: Updated at.
 
 ### `Item`
 Item model.
@@ -33,16 +43,6 @@ Item model.
   - `body`: Title of the item.
   - `status`: Status of the item.
   - `userId`: User ID.
-  - `createdAt`: Created at.
-  - `updatedAt`: Updated at.
-
-### `User`
-User model.
-
-**Properties**
-  - `id`: Primary Key. Auto-incremented.
-  - `username`: Unique username.
-  - `password`: Password.
   - `createdAt`: Created at.
   - `updatedAt`: Updated at.
 

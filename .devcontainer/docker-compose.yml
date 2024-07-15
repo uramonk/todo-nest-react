@@ -1,11 +1,21 @@
-version: '3.9'
+version: "3.9"
 
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../..:/workspaces:cached
+      - node-modules:/workspaces/todo-nest-react/node_modules
+    command: sleep infinity
+    network_mode: service:mysql
   mysql:
     image: mysql:8.0.36
     container_name: mysql-container
     ports:
-      - '3306:3306'
+      - "3306:3306"
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: db
@@ -18,3 +28,4 @@ services:
       - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
 volumes:
   mysql-data:
+  node-modules:

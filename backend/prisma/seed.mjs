@@ -3,7 +3,7 @@ import { PrismaClient, Status } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.$transaction(async (tx) => {
+  return await prisma.$transaction(async (tx) => {
     console.log('Seeding data...');
 
     const user1 = await tx.user.create({
